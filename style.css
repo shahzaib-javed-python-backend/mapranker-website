@@ -1,0 +1,9 @@
+/* Custom scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Glassmorphism effects */
+header {
+    backdrop-filter: blur(12px);
+}
