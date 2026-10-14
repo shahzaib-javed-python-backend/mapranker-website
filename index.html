@@ -88,6 +88,28 @@
         auditComplete: false,
         auditScore: 0,
 
+        // Competitor Comparison State
+        compMyBiz: '',
+        compRivalBiz: '',
+        compRunning: false,
+        compComplete: false,
+        myScore: 0,
+        rivalScore: 0,
+
+        // SEO Health Checklist State
+        chk1: true,
+        chk2: false,
+        chk3: false,
+        chk4: false,
+        get healthScore() {
+            let score = 20;
+            if(this.chk1) score += 20;
+            if(this.chk2) score += 20;
+            if(this.chk3) score += 20;
+            if(this.chk4) score += 20;
+            return score;
+        },
+
         // Geo-Grid Selected Area
         selectedGridCity: 'Manama (Seef District)',
         gridPins: [
@@ -132,6 +154,17 @@
             }, 3200);
         },
 
+        runCompetitorCheck() {
+            if(!this.compMyBiz || !this.compRivalBiz) return;
+            this.compRunning = true;
+            setTimeout(() => {
+                this.compRunning = false;
+                this.compComplete = true;
+                this.myScore = Math.floor(Math.random() * (45 - 25 + 1)) + 25;
+                this.rivalScore = Math.floor(Math.random() * (95 - 80 + 1)) + 80;
+            }, 2000);
+        },
+
         sendWhatsAppAudit() {
             let msg = `Hi MapRanker Team! I ran a Google Maps audit for my business:%0A%0A` +
                     `*Business / URL:* ${this.auditUrl}%0A` +
@@ -145,8 +178,7 @@
 
         generateReviewTool() {
             if(!this.reviewBizName) return;
-            let query = encodeURIComponent(this.reviewBizName.trim() + ' Bahrain');
-            // Yeh direct Google Maps search review query open karega jo kabhi 404 nahi degi
+            let query = encodeURIComponent(this.reviewBizName.trim() + " Bahrain");
             this.generatedReviewUrl = `https://www.google.com/maps/search/?api=1&query=${query}`;
             this.reviewLinkGenerated = true;
         }
@@ -189,12 +221,12 @@
 
             <!-- Desktop Nav Links -->
             <nav class="hidden lg:flex items-center space-x-7 space-x-reverse font-semibold text-xs tracking-wider uppercase text-slate-700">
-                <a href="#audit" class="hover:text-brand-600 transition" x-text="lang === 'en' ? 'Instant Audit' : 'تدقيق مجاني'"></a>
-                <a href="#heatmap" class="hover:text-brand-600 transition" x-text="lang === 'en' ? 'Geo-Grid Visualizer' : 'شبكة التغطية'"></a>
-                <a href="#services" class="hover:text-brand-600 transition" x-text="lang === 'en' ? 'Services' : 'خدماتنا'"></a>
-                <a href="#calculator" class="hover:text-brand-600 transition" x-text="lang === 'en' ? 'ROI Engine' : 'حاسبة الأرباح'"></a>
-                <a href="#case-studies" class="hover:text-brand-600 transition" x-text="lang === 'en' ? 'Case Studies' : 'قصص النجاح'"></a>
-                <a href="#pricing" class="hover:text-brand-600 transition" x-text="lang === 'en' ? 'Pricing' : 'الأسعار'"></a>
+                <a href="#audit" class="hover:text-brand-600 transition">Instant Audit</a>
+                <a href="#competitor" class="hover:text-brand-600 transition">Competitor Battle</a>
+                <a href="#checklist" class="hover:text-brand-600 transition">SEO Health Check</a>
+                <a href="#heatmap" class="hover:text-brand-600 transition">Geo-Grid</a>
+                <a href="#calculator" class="hover:text-brand-600 transition">ROI Engine</a>
+                <a href="#pricing" class="hover:text-brand-600 transition">Pricing</a>
             </nav>
 
             <!-- CTA Button -->
@@ -202,7 +234,7 @@
                target="_blank"
                class="bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl shadow-lg shadow-brand-500/20 transition flex items-center space-x-2 space-x-reverse">
                 <i class="fa-brands fa-whatsapp text-base"></i>
-                <span x-text="lang === 'en' ? 'Consult Growth Specialist' : 'تحدث مع خبير النمو'"></span>
+                <span>Consult Growth Specialist</span>
             </a>
         </div>
     </header>
@@ -216,16 +248,16 @@
                 <!-- Location Badge -->
                 <div class="inline-flex items-center space-x-2 space-x-reverse px-4 py-2 rounded-full bg-emerald-50 border border-brand-500/30 text-brand-700 text-xs font-bold shadow-sm">
                     <i class="fa-solid fa-location-dot animate-bounce"></i>
-                    <span x-text="lang === 'en' ? '#1 Enterprise Local SEO Engine for Bahrain & GCC' : 'محرك تحسين خرائط جوجل رقم 1 للشركات في البحرين'"></span>
+                    <span>#1 Enterprise Local SEO Engine for Bahrain & GCC</span>
                 </div>
 
                 <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight text-slate-900">
-                    <span x-text="lang === 'en' ? 'Capture Every High-Paying Walk-In Client in' : 'استحوذ على كافة العملاء المستهدفين في'"></span>
+                    <span>Capture Every High-Paying Walk-In Client in</span>
                     <span class="gradient-text block mt-1">Bahrain & Seef District</span>
                 </h1>
 
-                <p class="text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed"
-                   x-text="lang === 'en' ? 'We engineer automated local search dominance for Dental Clinics, Real Estate Firms, Automotive Centers, and Fine Dining using Python Grid Scraping & Google Maps SEO.' : 'نصمم استراتيجيات أتمتة لسيطرة العيادات، العقارات، والمراكز التجارية على خرائط جوجل في البحرين.'">
+                <p class="text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                    We engineer automated local search dominance for Dental Clinics, Real Estate Firms, Automotive Centers, and Fine Dining using Python Grid Scraping & Google Maps SEO.
                 </p>
 
                 <!-- City Target Badges -->
@@ -242,8 +274,8 @@
             <!-- Live Audit Simulator Box -->
             <div id="audit" class="mt-14 max-w-3xl mx-auto glass-card p-6 md:p-10 rounded-3xl border border-brand-500/20 shadow-2xl relative glow-emerald">
                 <div class="text-center mb-6">
-                    <h3 class="text-2xl font-black text-slate-900" x-text="lang === 'en' ? 'Run Instant Google Maps Local Rank Audit' : 'نفّذ تدقيقًا مجانيًا لفحص ترتيبك على خرائط جوجل'"></h3>
-                    <p class="text-xs text-slate-600 mt-1" x-text="lang === 'en' ? 'Enter your Google Business Name or Website URL to trigger automatic competitor grid scan.' : 'أدخل اسم نشاطك التجاري أو رابط موقعك لبدء الفحص التلقائي.'"></p>
+                    <h3 class="text-2xl font-black text-slate-900">Run Instant Google Maps Local Rank Audit</h3>
+                    <p class="text-xs text-slate-600 mt-1">Enter your Google Business Name or Website URL to trigger automatic competitor grid scan.</p>
                 </div>
 
                 <form @submit.prevent="runAudit()" class="space-y-4">
@@ -264,7 +296,7 @@
                             class="w-full bg-gradient-to-r from-brand-500 via-emerald-500 to-teal-600 hover:from-brand-600 hover:to-teal-700 text-white font-black py-4 rounded-xl text-sm uppercase tracking-wider shadow-xl transition flex items-center justify-center space-x-2 space-x-reverse cursor-pointer">
                         <i x-show="!auditRunning" class="fa-solid fa-bolt"></i>
                         <i x-show="auditRunning" class="fa-solid fa-spinner fa-spin"></i>
-                        <span x-text="auditRunning ? (lang === 'en' ? 'Scanning Bahrain Google Map Grid...' : 'جاري تحليل نتائج جوجل في البحرين...') : (lang === 'en' ? 'Analyze My Local Map Rank Now' : 'افحص ترتيبي الآن')"></span>
+                        <span x-text="auditRunning ? 'Scanning Bahrain Google Map Grid...' : 'Analyze My Local Map Rank Now'"></span>
                     </button>
                 </form>
 
@@ -290,16 +322,121 @@
                                     <span x-text="auditScore"></span>/100
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-slate-900 text-sm" x-text="lang === 'en' ? 'Audit Scan Complete: Missing Top 3 Pack' : 'اكتمل الفحص: نقص في المراكز الثلاثة الأولى'"></h4>
-                                    <p class="text-xs text-slate-600 mt-1" x-text="lang === 'en' ? 'Your business is invisible to 68% of walk-in search clients in Bahrain.' : 'نشاطك غير مرئي لـ 68% من الباحثين في البحرين.'"></p>
+                                    <h4 class="font-bold text-slate-900 text-sm">Audit Scan Complete: Missing Top 3 Pack</h4>
+                                    <p class="text-xs text-slate-600 mt-1">Your business is invisible to 68% of walk-in search clients in Bahrain.</p>
                                 </div>
                             </div>
                             <button @click="sendWhatsAppAudit()" class="w-full md:w-auto bg-brand-500 hover:bg-brand-600 text-white font-black text-xs uppercase px-5 py-3.5 rounded-xl flex items-center justify-center space-x-2 space-x-reverse whitespace-nowrap shadow-lg cursor-pointer">
                                 <i class="fa-solid fa-file-pdf text-base"></i>
-                                <span x-text="lang === 'en' ? 'Get Full 12-Page PDF Report on WhatsApp' : 'احصل على التقرير التفصيلي PDF'"></span>
+                                <span>Get Full 12-Page PDF Report on WhatsApp</span>
                             </button>
                         </div>
                     </template>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW FEATURE 1: Live Competitor Head-to-Head Comparison Tool -->
+    <section id="competitor" class="py-20 bg-white border-y border-slate-200">
+        <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Head-to-Head Rival Battle</span>
+                <h2 class="text-3xl font-black text-slate-900 mt-3">Compare Your Map Rank Against Your #1 Competitor</h2>
+                <p class="text-xs text-slate-600 mt-2">See exactly how many reviews, citations, and local ranking power your top competitor is stealing from you.</p>
+            </div>
+
+            <div class="glass-card p-8 md:p-12 rounded-3xl border border-slate-200 shadow-xl space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Your Business / Brand Name:</label>
+                        <input type="text" x-model="compMyBiz" placeholder="e.g. Seef Dental Clinic"
+                               class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3.5 text-xs text-slate-900 focus:outline-none focus:border-brand-500 shadow-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Top Local Competitor Name:</label>
+                        <input type="text" x-model="compRivalBiz" placeholder="e.g. Bahrain Specialist Hospital"
+                               class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3.5 text-xs text-slate-900 focus:outline-none focus:border-brand-500 shadow-xs">
+                    </div>
+                </div>
+
+                <button @click="runCompetitorCheck()" :disabled="compRunning"
+                        class="w-full bg-slate-900 hover:bg-slate-800 text-white font-black py-4 rounded-xl text-xs uppercase tracking-wider transition shadow-md flex items-center justify-center space-x-2 cursor-pointer">
+                    <i x-show="compRunning" class="fa-solid fa-spinner fa-spin"></i>
+                    <span x-text="compRunning ? 'Analyzing Competitor Backlinks & Citations...' : 'Run Comparative Rival Battle Scan'"></span>
+                </button>
+
+                <!-- Comparison Result Matrix -->
+                <div x-show="compComplete" x-cloak class="pt-6 border-t border-slate-200 space-y-6 animate-fadeIn">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- My Biz Stats -->
+                        <div class="bg-rose-50 border border-rose-200 p-6 rounded-2xl text-center space-y-2">
+                            <span class="text-xs font-bold text-rose-700 uppercase" x-text="compMyBiz || 'Your Business'"></span>
+                            <div class="text-3xl font-black font-mono text-rose-600" x-text="myScore + '/100'"></div>
+                            <p class="text-xs text-slate-600">Low review velocity, missing Seef district geotagged citations, invisible on mobile map pack.</p>
+                        </div>
+                        <!-- Rival Biz Stats -->
+                        <div class="bg-emerald-50 border border-emerald-300 p-6 rounded-2xl text-center space-y-2">
+                            <span class="text-xs font-bold text-emerald-800 uppercase" x-text="compRivalBiz || 'Top Competitor'"></span>
+                            <div class="text-3xl font-black font-mono text-brand-600" x-text="rivalScore + '/100'"></div>
+                            <p class="text-xs text-slate-600">Dominating top 3 spots with 180+ 5-star reviews and robust local schema authority.</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center bg-slate-900 text-white p-6 rounded-2xl space-y-3">
+                        <p class="text-xs font-semibold">⚠️ You are losing approx. 65% of potential client calls to this competitor every single week.</p>
+                        <a :href="`https://wa.me/${whatsappNum}?text=I%20want%20to%20outrank%20my%20competitor%20${encodeURIComponent(compRivalBiz)}%20for%20my%20business%20${encodeURIComponent(compMyBiz)}.`" target="_blank"
+                           class="inline-block bg-brand-500 hover:bg-brand-600 text-slate-950 font-black text-xs uppercase px-6 py-3 rounded-xl shadow-lg transition">
+                            Deploy Strategy to Outrank Competitor Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW FEATURE 2: 60-Second Local SEO Health Checklist & Scorecard -->
+    <section id="checklist" class="py-20 bg-slate-100/70 border-t border-slate-200">
+        <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Interactive Scorecard</span>
+                <h2 class="text-3xl font-black text-slate-900 mt-3">60-Second Local SEO Health Checklist</h2>
+                <p class="text-xs text-slate-600 mt-2">Check the boxes below that apply to your business profile to reveal your instant optimization score.</p>
+            </div>
+
+            <div class="glass-card p-8 md:p-10 rounded-3xl border border-slate-200 shadow-xl space-y-6">
+                <div class="space-y-4">
+                    <label class="flex items-center space-x-3 space-x-reverse cursor-pointer bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
+                        <input type="checkbox" x-model="chk1" class="w-5 h-5 accent-brand-500 rounded">
+                        <span class="text-xs font-bold text-slate-800">Is your Google Business Profile fully verified with correct Bahrain category?</span>
+                    </label>
+
+                    <label class="flex items-center space-x-3 space-x-reverse cursor-pointer bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
+                        <input type="checkbox" x-model="chk2" class="w-5 h-5 accent-brand-500 rounded">
+                        <span class="text-xs font-bold text-slate-800">Do you receive at least 10 new Google 5-star reviews every month?</span>
+                    </label>
+
+                    <label class="flex items-center space-x-3 space-x-reverse cursor-pointer bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
+                        <input type="checkbox" x-model="chk3" class="w-5 h-5 accent-brand-500 rounded">
+                        <span class="text-xs font-bold text-slate-800">Are you ranking in the Top 3 map pack for customers searching from Seef or Manama?</span>
+                    </label>
+
+                    <label class="flex items-center space-x-3 space-x-reverse cursor-pointer bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
+                        <input type="checkbox" x-model="chk4" class="w-5 h-5 accent-brand-500 rounded">
+                        <span class="text-xs font-bold text-slate-800">Do you have automated WhatsApp lead routing active on your website & GMB?</span>
+                    </label>
+                </div>
+
+                <!-- Live Score Card -->
+                <div class="bg-slate-900 text-white p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs text-slate-400 uppercase font-semibold">Your Local SEO Health Score:</span>
+                        <div class="text-3xl font-black font-mono text-brand-400 mt-1" x-text="healthScore + '% Optimized'"></div>
+                    </div>
+                    <a :href="`https://wa.me/${whatsappNum}?text=I%20checked%20my%20Local%20SEO%20health%20score%20and%20it%20is%20${healthScore}%25.%20I%20want%20to%20fix%20my%20gaps.`" target="_blank"
+                       class="w-full md:w-auto bg-brand-500 hover:bg-brand-600 text-slate-950 font-black text-xs uppercase px-6 py-3.5 rounded-xl shadow-lg text-center">
+                        Fix My Gaps via WhatsApp
+                    </a>
                 </div>
             </div>
         </div>
@@ -310,8 +447,8 @@
         <div class="container mx-auto px-4 lg:px-8 max-w-6xl">
             <div class="text-center max-w-2xl mx-auto mb-14">
                 <span class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Geo-Grid Rank Heatmap</span>
-                <h2 class="text-3xl font-black text-slate-900 mt-3" x-text="lang === 'en' ? 'How Google Maps Ranking Varies Across Bahrain' : 'كيف يختلف ترتيبك عبر مناطق البحرين المختلفة'"></h2>
-                <p class="text-xs text-slate-600 mt-2" x-text="lang === 'en' ? 'Search rankings change every 500 meters. See how our Python Local SEO grid engine turns red missing spots into green Top 3 positions.' : 'تتغير نتائج البحث كل 500 متر. شاهد كيف تحول تقنيتنا التغطية من اللون الأحمر إلى الأخضر.'"></p>
+                <h2 class="text-3xl font-black text-slate-900 mt-3">How Google Maps Ranking Varies Across Bahrain</h2>
+                <p class="text-xs text-slate-600 mt-2">Search rankings change every 500 meters. See how our Python Local SEO grid engine turns red missing spots into green Top 3 positions.</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -329,9 +466,9 @@
                     <div class="grid grid-cols-3 gap-3">
                         <template x-for="(pin, idx) in gridPins" :key="idx">
                             <div class="p-4 rounded-2xl flex flex-col items-center justify-center text-center transition border"
-                                 :class="pin.rank <= 3 ? 'bg-emerald-50 border-emerald-300 text-emerald-700 shadow-xs' : 'bg-rose-50 border-rose-200 text-rose-700 shadow-xs'">
+                                   :class="pin.rank <= 3 ? 'bg-emerald-50 border-emerald-300 text-emerald-700 shadow-xs' : 'bg-rose-50 border-rose-200 text-rose-700 shadow-xs'">
                                 <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold mb-1"
-                                   :class="pin.rank <= 3 ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white'">
+                                     :class="pin.rank <= 3 ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white'">
                                     <span x-text="pin.rank"></span>
                                 </div>
                                 <span class="text-[10px] font-bold tracking-wider uppercase" x-text="pin.text"></span>
@@ -368,302 +505,246 @@
         </div>
     </section>
 
-    <!-- Visual Before/After Case Studies -->
-    <section id="case-studies" class="py-20">
-        <div class="container mx-auto px-4 lg:px-8 max-w-6xl">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Proven GCC Case Studies</span>
-                <h2 class="text-3xl font-black text-slate-900 mt-3" x-text="lang === 'en' ? 'Verified Ranking & Revenue Transformations' : 'نتائج واقعية لمؤسسات حقيقية في البحرين'"></h2>
-                <p class="text-sm text-slate-600 mt-2" x-text="lang === 'en' ? 'See how local Bahrain businesses moved from invisible search results to Top 3 Google Map positions.' : 'قصص نجاح واقعية لعيادات، مطاعم، وشركات عقارية.'"></p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Case Study 1 -->
-                <div class="glass-card p-6 rounded-3xl border border-slate-200 space-y-4 hover:border-brand-500 transition shadow-md">
-                    <div class="flex justify-between items-center">
-                        <span class="text-[10px] font-bold text-brand-700 uppercase tracking-widest bg-emerald-50 px-2.5 py-1 rounded border border-brand-500/20">Dental Clinic — Seef</span>
-                        <span class="text-xs font-mono text-emerald-600 font-bold">35 Days</span>
-                    </div>
-                    
-                    <h3 class="text-base font-bold text-slate-900">+240% Walk-in Appointments</h3>
-
-                    <div class="bg-white p-4 rounded-2xl border border-slate-200 grid grid-cols-2 gap-2 text-center shadow-xs">
-                        <div class="border-r border-slate-200 pr-2">
-                            <span class="text-[10px] text-slate-500 uppercase font-bold block">Before</span>
-                            <span class="text-lg font-black text-rose-600">Rank #14</span>
-                        </div>
-                        <div class="pl-2">
-                            <span class="text-[10px] text-emerald-600 uppercase font-bold block">After</span>
-                            <span class="text-lg font-black text-brand-600">Rank #1</span>
-                        </div>
-                    </div>
-
-                    <p class="text-xs text-slate-600 leading-relaxed">Dominating keywords: 'Dental Implants Seef', 'Best Dentist Manama'. Added 120+ geotagged medical citations.</p>
-                </div>
-
-                <!-- Case Study 2 -->
-                <div class="glass-card p-6 rounded-3xl border border-slate-200 space-y-4 hover:border-brand-500 transition shadow-md">
-                    <div class="flex justify-between items-center">
-                        <span class="text-[10px] font-bold text-brand-700 uppercase tracking-widest bg-emerald-50 px-2.5 py-1 rounded border border-brand-500/20">Real Estate — Manama</span>
-                        <span class="text-xs font-mono text-emerald-600 font-bold">45 Days</span>
-                    </div>
-                    
-                    <h3 class="text-base font-bold text-slate-900">45+ High-Ticket Apartment Leads</h3>
-
-                    <div class="bg-white p-4 rounded-2xl border border-slate-200 grid grid-cols-2 gap-2 text-center shadow-xs">
-                        <div class="border-r border-slate-200 pr-2">
-                            <span class="text-[10px] text-slate-500 uppercase font-bold block">Before</span>
-                            <span class="text-lg font-black text-rose-600">Rank #18</span>
-                        </div>
-                        <div class="pl-2">
-                            <span class="text-[10px] text-emerald-600 uppercase font-bold block">After</span>
-                            <span class="text-lg font-black text-brand-600">Rank #2</span>
-                        </div>
-                    </div>
-
-                    <p class="text-xs text-slate-600 leading-relaxed">Targeted luxury property buyers in Amwaj Islands & Reef Island via automated Google Maps & WhatsApp funnel.</p>
-                </div>
-
-                <!-- Case Study 3 -->
-                <div class="glass-card p-6 rounded-3xl border border-slate-200 space-y-4 hover:border-brand-500 transition shadow-md">
-                    <div class="flex justify-between items-center">
-                        <span class="text-[10px] font-bold text-brand-700 uppercase tracking-widest bg-emerald-50 px-2.5 py-1 rounded border border-brand-500/20">Auto Garage — Riffa</span>
-                        <span class="text-xs font-mono text-emerald-600 font-bold">20 Days</span>
-                    </div>
-                    
-                    <h3 class="text-base font-bold text-slate-900">3.2x Monthly Calls & Direct Visits</h3>
-
-                    <div class="bg-white p-4 rounded-2xl border border-slate-200 grid grid-cols-2 gap-2 text-center shadow-xs">
-                        <div class="border-r border-slate-200 pr-2">
-                            <span class="text-[10px] text-slate-500 uppercase font-bold block">Before</span>
-                            <span class="text-lg font-black text-rose-600">Rank #22</span>
-                        </div>
-                        <div class="pl-2">
-                            <span class="text-[10px] text-emerald-600 uppercase font-bold block">After</span>
-                            <span class="text-lg font-black text-brand-600">Rank #1</span>
-                        </div>
-                    </div>
-
-                    <p class="text-xs text-slate-600 leading-relaxed">Integrated review request automation via WhatsApp link to generate 80+ 5-star customer reviews in 3 weeks.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-20 bg-slate-100/70 border-t border-slate-200">
-        <div class="container mx-auto px-4 lg:px-8 max-w-6xl">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl font-black text-slate-900" x-text="lang === 'en' ? 'Engineered for High-Converting Growth' : 'خدمات مصممة لمضاعفة عملائك بسرعة'"></h2>
-                <p class="text-sm text-slate-600 mt-2" x-text="lang === 'en' ? 'We combine Python scraping, technical SEO, and Meta/Google Ads funnel building.' : 'نجمع بين أتمتة البايثون، تحسين محركات البحث، وإعلانات جوجل للوصول للعميل المثالي.'"></p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass-card p-6 rounded-3xl border border-slate-200 space-y-4 hover:border-brand-500 transition shadow-md">
-                    <div class="w-12 h-12 bg-emerald-100 text-brand-700 rounded-2xl flex items-center justify-center text-xl font-bold shadow-xs">
-                        <i class="fa-solid fa-map-location-dot"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900">Google Maps Domination</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">Optimization for local search terms like "dental clinic near me" or "real estate in Seef". Keyword geo-tagging, citation cleanup, and review triggers.</p>
-                </div>
-
-                <div class="glass-card p-6 rounded-3xl border border-slate-200 space-y-4 hover:border-brand-500 transition shadow-md">
-                    <div class="w-12 h-12 bg-emerald-100 text-brand-700 rounded-2xl flex items-center justify-center text-xl font-bold shadow-xs">
-                        <i class="fa-solid fa-code"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900">Python Automation & Scraping</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">Custom Python scripts to track local Bahrain competitors daily, analyze missing backlinks, and auto-route WhatsApp leads instantly to your team.</p>
-                </div>
-
-                <div class="glass-card p-6 rounded-3xl border border-slate-200 space-y-4 hover:border-brand-500 transition shadow-md">
-                    <div class="w-12 h-12 bg-emerald-100 text-brand-700 rounded-2xl flex items-center justify-center text-xl font-bold shadow-xs">
-                        <i class="fa-solid fa-bullseye"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900">Meta & Google Ads Funnels</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">High-converting ad campaigns targeted to users physically located in Bahrain and the Seef district ready to book appointments.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- ROI Calculator Section -->
-    <section id="calculator" class="py-20 bg-white border-t border-slate-200">
-        <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
-            <div class="text-center mb-14">
-                <span class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Revenue Calculator</span>
-                <h2 class="text-3xl font-black text-slate-900 mt-3">Calculate What Rank #1 on Maps is Worth to You</h2>
-                <p class="text-xs text-slate-600 mt-2">See your estimated monthly loss staying outside the Top 3 map pack in Bahrain.</p>
+    <section id="calculator" class="py-20 bg-white border-y border-slate-200">
+        <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Interactive Revenue Calculator</span>
+                <h2 class="text-3xl font-black text-slate-900 mt-3">Calculate What Missing Top 3 Map Rank Costs You</h2>
+                <p class="text-xs text-slate-600 mt-2">Adjust your average customer deal value and monthly lost map leads to see your revenue potential.</p>
             </div>
 
-            <div class="glass-card p-8 rounded-3xl border border-slate-200 shadow-xl space-y-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div class="space-y-6">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-2">Average Customer Deal Value (<span x-text="currency"></span>): <span class="text-brand-600 font-mono text-sm" x-text="formattedDealValue"></span></label>
-                            <input type="range" min="50" max="2000" step="25" x-model.number="dealValue" class="w-full accent-brand-500 cursor-pointer">
+            <div class="glass-card p-8 md:p-12 rounded-3xl border border-slate-200 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Sliders Controls -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Average Deal / Customer Value:</label>
+                            <span class="font-mono font-black text-brand-700 text-sm" x-text="formattedDealValue"></span>
                         </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-2">Estimated Monthly Missed Walk-In Leads: <span class="text-brand-600 font-mono text-sm" x-text="monthlyLeads"></span> Leads</label>
-                            <input type="range" min="5" max="60" step="1" x-model.number="monthlyLeads" class="w-full accent-brand-500 cursor-pointer">
-                        </div>
+                        <input type="range" min="50" max="2000" step="50" x-model.number="dealValue" class="w-full accent-brand-500 cursor-pointer">
                     </div>
 
-                    <div class="bg-slate-900 text-white p-6 rounded-2xl border border-slate-800 space-y-4 text-center">
-                        <span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold block">Estimated Monthly Revenue Loss</span>
-                        <div class="text-3xl md:text-4xl font-black text-rose-400 font-mono" x-text="monthlyLoss"></div>
-                        <div class="pt-3 border-t border-slate-800 flex justify-between text-xs">
-                            <span class="text-slate-400">Potential Rank #1 Growth:</span>
-                            <span class="text-brand-400 font-bold font-mono" x-text="potentialGain"></span>
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Estimated Lost Monthly Map Leads:</label>
+                            <span class="font-mono font-black text-brand-700 text-sm" x-text="monthlyLeads + ' Leads'"></span>
                         </div>
+                        <input type="range" min="5" max="60" step="1" x-model.number="monthlyLeads" class="w-full accent-brand-500 cursor-pointer">
+                    </div>
+
+                    <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200 text-xs text-emerald-800 space-y-1">
+                        <p class="font-bold"><i class="fa-solid fa-circle-info mr-1"></i> Local Market Insight (Bahrain):</p>
+                        <p>Over 80% of high-intent consumers looking for dental, real estate, or automotive services in Manama & Seef call the top 3 businesses on Google Maps directly.</p>
                     </div>
                 </div>
 
-                <div class="text-center pt-2">
-                    <a :href="`https://wa.me/${whatsappNum}?text=I%20want%20to%20stop%20losing%20revenue%20and%20rank%20Top%20#1%20on%20Google%20Maps%20in%20Bahrain.`" target="_blank"
-                       class="inline-flex items-center space-x-2 space-x-reverse bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white font-black text-xs uppercase px-8 py-4 rounded-xl shadow-lg shadow-brand-500/20 transition">
-                        <i class="fa-brands fa-whatsapp text-base"></i>
-                        <span>Claim Your Top #1 Map Rank Strategy Now</span>
+                <!-- Calculation Result Box -->
+                <div class="lg:col-span-5 bg-slate-900 text-white p-8 rounded-3xl space-y-6 shadow-xl border border-slate-800 text-center">
+                    <div>
+                        <span class="text-xs text-slate-400 uppercase tracking-widest font-semibold block">Estimated Monthly Revenue Loss</span>
+                        <div class="text-3xl font-black font-mono text-rose-400 mt-1" x-text="monthlyLoss"></div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-800">
+                        <span class="text-xs text-emerald-400 uppercase tracking-widest font-semibold block">Potential Monthly Gain with MapRanker</span>
+                        <div class="text-4xl font-black font-mono text-brand-400 mt-1" x-text="potentialGain"></div>
+                    </div>
+
+                    <a :href="`https://wa.me/${whatsappNum}?text=I%20want%20to%20recapture%20my%20lost%20map%20leads.%20Estimated%20Gain:%20${potentialGain}`" target="_blank"
+                       class="w-full bg-gradient-to-r from-brand-500 to-emerald-500 hover:from-brand-600 hover:to-emerald-600 text-slate-950 font-black text-xs uppercase py-4 rounded-xl shadow-lg block tracking-wider">
+                        Claim Your Market Share Now
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-20 bg-slate-50 border-t border-slate-200">
+    <!-- Free Tools Section (Review Link Generator) -->
+    <section id="tools" class="py-20">
+        <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Free Local SEO Utility</span>
+                <h2 class="text-3xl font-black text-slate-900 mt-3">Google Maps 5-Star Review Link Generator</h2>
+                <p class="text-xs text-slate-600 mt-2">Generate a direct Google review link for your Bahrain business to send instantly via WhatsApp to your happy customers.</p>
+            </div>
+
+            <div class="glass-card p-6 md:p-8 rounded-3xl border border-slate-200 shadow-xl space-y-6">
+                <div class="flex flex-col md:flex-row gap-3">
+                    <input type="text" x-model="reviewBizName" placeholder="Enter Business Name (e.g. Seef Dental Bahrain)"
+                           class="flex-1 bg-white border border-slate-300 rounded-xl px-4 py-3.5 text-xs text-slate-900 focus:outline-none focus:border-brand-500 shadow-xs">
+                    <button @click="generateReviewTool()"
+                            class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-6 py-3.5 rounded-xl text-xs uppercase tracking-wider transition cursor-pointer shadow-md">
+                        Generate Review Link
+                    </button>
+                </div>
+
+                <div x-show="reviewLinkGenerated" x-cloak class="bg-emerald-50 p-5 rounded-2xl border border-emerald-200 space-y-3">
+                    <span class="text-xs font-bold text-emerald-900 block">Your Direct Google Review Link is Ready:</span>
+                    <input type="text" readonly :value="generatedReviewUrl"
+                           class="w-full bg-white border border-emerald-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-700 select-all">
+                    <div class="flex flex-wrap gap-2 pt-1">
+                        <a :href="generatedReviewUrl" target="_blank" class="bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-xs">
+                            Test Link <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                        </a>
+                        <a :href="`https://wa.me/?text=Hi!%20Please%20leave%20us%20a%205-star%20review%20here:%20${encodeURIComponent(generatedReviewUrl)}`" target="_blank"
+                           class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-xs">
+                            Share via WhatsApp <i class="fa-brands fa-whatsapp ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / Packages Section -->
+    <section id="pricing" class="py-20 bg-slate-100/70 border-t border-slate-200">
         <div class="container mx-auto px-4 lg:px-8 max-w-6xl">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <span class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Transparent Investment</span>
-                <h2 class="text-3xl font-black text-slate-900 mt-3">Simple, Results-Driven Pricing for Bahrain Enterprises</h2>
-                <p class="text-xs text-slate-600 mt-2">No long-term lock-in contracts. Guaranteed local SEO momentum in Manama & Seef.</p>
+                <h2 class="text-3xl font-black text-slate-900 mt-3">Local SEO & Map Domination Packages</h2>
+                <p class="text-sm text-slate-600 mt-2">No hidden fees. Guaranteed Top 3 Map Pack rankings or we work for free until you rank.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Starter Plan -->
-                <div class="glass-card p-8 rounded-3xl border border-slate-200 flex flex-col justify-between shadow-md">
+                <!-- Starter Package -->
+                <div class="glass-card p-8 rounded-3xl border border-slate-200 space-y-6 flex flex-col justify-between shadow-md">
                     <div class="space-y-4">
-                        <span class="text-[10px] font-bold text-slate-600 uppercase tracking-widest bg-slate-100 px-3 py-1 rounded-md border border-slate-200">Local Starter</span>
-                        <h3 class="text-xl font-black text-slate-900">Single Branch Optimization</h3>
-                        <div class="text-3xl font-black text-brand-700">
-                            <span x-text="currency === 'BHD' ? '150 BHD' : '$400'"></span><span class="text-xs text-slate-500 font-normal"> /mo</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-slate-600 uppercase tracking-widest">Starter Local</span>
+                            <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-semibold">1 Location</span>
                         </div>
-                        <ul class="space-y-2.5 text-xs text-slate-600 pt-2">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Google Business Profile Setup & Audit</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> 50 Local Geotagged Citations (Bahrain)</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Weekly Review Request Automation Link</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Monthly Geo-Grid Rank Report</li>
+                        <h3 class="text-2xl font-black text-slate-900">150 BHD <span class="text-xs font-normal text-slate-500">/mo</span></h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Ideal for single-location clinics or shops starting out in Bahrain.</p>
+                        
+                        <ul class="space-y-3 text-xs text-slate-700 pt-2 border-t border-slate-200">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Google Business Profile Audit</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Primary Category Optimization</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> 30 Geotagged Citations / mo</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Monthly Ranking Report</li>
                         </ul>
                     </div>
-                    <div class="pt-8">
-                        <a :href="`https://wa.me/${whatsappNum}?text=I%20am%20interested%20in%20the%20Local%20Starter%20Plan%20(150%20BHD).`" target="_blank"
-                           class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-xl uppercase tracking-wider flex items-center justify-center space-x-2 space-x-reverse transition">
-                            <span>Get Started Now</span>
-                        </a>
-                    </div>
+                    <a :href="`https://wa.me/${whatsappNum}?text=I%20want%20to%20get%20started%20with%20the%20Starter%20Local%20Package%20(150%20BHD).`" target="_blank"
+                       class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-xl uppercase tracking-wider text-center transition shadow-sm">
+                        Choose Starter
+                    </a>
                 </div>
 
-                <!-- Growth Enterprise Plan -->
-                <div class="glass-card p-8 rounded-3xl border-2 border-brand-500 flex flex-col justify-between shadow-2xl relative glow-emerald bg-white">
-                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-brand-500 to-emerald-600 text-white text-[10px] font-black uppercase tracking-widest px-4 py-1 rounded-full shadow-md">
-                        Most Popular in Seef
+                <!-- Pro Enterprise Package (Highlighted) -->
+                <div class="glass-card p-8 rounded-3xl border-2 border-brand-500 space-y-6 flex flex-col justify-between shadow-xl relative bg-white">
+                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-brand-500 to-emerald-600 text-white text-[10px] font-black uppercase px-4 py-1 rounded-full shadow-md tracking-wider">
+                        Most Popular for Seef & Manama
                     </div>
-                    <div class="space-y-4">
-                        <span class="text-[10px] font-bold text-brand-700 uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-md border border-brand-500/20">Enterprise Domination</span>
-                        <h3 class="text-xl font-black text-slate-900">Seef & Manama Growth Engine</h3>
-                        <div class="text-3xl font-black text-brand-700">
-                            <span x-text="currency === 'BHD' ? '290 BHD' : '$760'"></span><span class="text-xs text-slate-500 font-normal"> /mo</span>
+
+                    <div class="space-y-4 pt-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-brand-700 uppercase tracking-widest">Growth Engine</span>
+                            <span class="text-[10px] bg-emerald-100 text-brand-800 px-2 py-0.5 rounded font-bold">Priority ROI</span>
                         </div>
-                        <ul class="space-y-2.5 text-xs text-slate-600 pt-2">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Everything in Starter + Python Competitor Scraping</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> 150+ GCC & Bahrain Authority Citations</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Automated WhatsApp Lead Routing Funnel</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Bi-Weekly 3x3 Geo-Grid Rank Heatmap</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Dedicated Local SEO Specialist</li>
+                        <h3 class="text-3xl font-black text-slate-900">300 BHD <span class="text-xs font-normal text-slate-500">/mo</span></h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Full Python Geo-Grid optimization to dominate your local district.</p>
+                        
+                        <ul class="space-y-3 text-xs text-slate-700 pt-2 border-t border-slate-200">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Everything in Starter Package</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Full 3x3 / 5x5 Geo-Grid Heatmap Tracking</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> 90 Geotagged Authority Citations</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> WhatsApp Review Request Automation</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Dedicated Account Manager (+973)</li>
                         </ul>
                     </div>
-                    <div class="pt-8">
-                        <a :href="`https://wa.me/${whatsappNum}?text=I%20want%20to%20dominate%20with%20the%20Enterprise%20Growth%20Plan%20(290%20BHD).`" target="_blank"
-                           class="w-full bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider flex items-center justify-center space-x-2 space-x-reverse shadow-lg transition">
-                            <i class="fa-brands fa-whatsapp"></i>
-                            <span>Dominate Google Maps Now</span>
-                        </a>
-                    </div>
+                    <a :href="`https://wa.me/${whatsappNum}?text=I%20want%20to%20get%20started%20with%20the%20Growth%20Engine%20Package%20(300%20BHD).`" target="_blank"
+                       class="w-full bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white font-black text-xs py-4 rounded-xl uppercase tracking-wider text-center shadow-lg transition">
+                        Get Growth Engine
+                    </a>
                 </div>
 
-                <!-- Multi-Branch Franchise Plan -->
-                <div class="glass-card p-8 rounded-3xl border border-slate-200 flex flex-col justify-between shadow-md">
+                <!-- Multi-Location / Franchise -->
+                <div class="glass-card p-8 rounded-3xl border border-slate-200 space-y-6 flex flex-col justify-between shadow-md">
                     <div class="space-y-4">
-                        <span class="text-[10px] font-bold text-slate-600 uppercase tracking-widest bg-slate-100 px-3 py-1 rounded-md border border-slate-200">Multi-Branch Chain</span>
-                        <h3 class="text-xl font-black text-slate-900">GCC Regional Franchise</h3>
-                        <div class="text-3xl font-black text-brand-700">
-                            <span x-text="currency === 'BHD' ? '550 BHD' : '$1,450'"></span><span class="text-xs text-slate-500 font-normal"> /mo</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-slate-600 uppercase tracking-widest">Multi-Branch</span>
+                            <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-semibold">Custom</span>
                         </div>
-                        <ul class="space-y-2.5 text-xs text-slate-600 pt-2">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Up to 5 Google Business Profiles</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Multi-City Grid Monitoring (Manama, Riffa, Muharraq)</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Advanced API Lead Integration & CRM Sync</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Dedicated Account Manager & Priority Support</li>
+                        <h3 class="text-2xl font-black text-slate-900">Custom <span class="text-xs font-normal text-slate-500">/mo</span></h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">For multi-branch clinics, franchises, and large real estate firms across Bahrain.</p>
+                        
+                        <ul class="space-y-3 text-xs text-slate-700 pt-2 border-t border-slate-200">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Unlimited GBP Locations Management</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Custom Python Competitor Scraping API</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Advanced Schema & Local Landing Pages</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> 24/7 Priority Support & WhatsApp Funnels</li>
                         </ul>
                     </div>
-                    <div class="pt-8">
-                        <a :href="`https://wa.me/${whatsappNum}?text=I%20want%20the%20Multi-Branch%20Franchise%20Plan%20(550%20BHD).`" target="_blank"
-                           class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-xl uppercase tracking-wider flex items-center justify-center space-x-2 space-x-reverse transition">
-                            <span>Contact Enterprise Sales</span>
-                        </a>
-                    </div>
+                    <a :href="`https://wa.me/${whatsappNum}?text=I%20want%20a%20Custom%20Multi-Branch%20Local%20SEO%20Proposal%20for%20Bahrain.`" target="_blank"
+                       class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-xl uppercase tracking-wider text-center transition shadow-sm">
+                        Contact Enterprise
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Free Review Link Generator Tool Section -->
-    <section class="py-20 bg-white border-t border-slate-200">
-        <div class="container mx-auto px-4 lg:px-8 max-w-3xl">
-            <div class="glass-card p-8 md:p-10 rounded-3xl border border-brand-500/20 shadow-xl space-y-6">
-                <div class="text-center space-y-2">
-                    <span class="text-brand-600 text-[10px] font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Free Growth Tool</span>
-                    <h3 class="text-2xl font-black text-slate-900">Generate Your Direct Google Review Link</h3>
-                    <p class="text-xs text-slate-600">Enter your business name to create a direct 1-click Google review link for your WhatsApp customers.</p>
-                </div>
-
-                <div class="space-y-4">
-                    <div class="flex gap-2">
-                        <input type="text" x-model="reviewBizName" placeholder="Enter Business Name (e.g. Seef Motors Bahrain)"
-                               class="flex-1 bg-white border border-slate-300 rounded-xl px-4 py-3.5 text-xs text-slate-900 focus:outline-none focus:border-brand-500 shadow-xs">
-                        <button @click="generateReviewTool()" class="bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs uppercase px-6 py-3.5 rounded-xl shadow-md transition whitespace-nowrap cursor-pointer">
-                            Generate Link
-                        </button>
-                    </div>
-
-                    <div x-show="reviewLinkGenerated" x-cloak class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-3">
-                        <span class="text-[11px] font-bold text-brand-800 block">Your Direct Google Maps Review Search URL:</span>
-                        <div class="bg-white p-3 rounded-xl border border-emerald-200 text-xs font-mono text-slate-700 break-all select-all" x-text="generatedReviewUrl"></div>
-                        <div class="flex gap-2 pt-1">
-                            <a :href="generatedReviewUrl" target="_blank" class="flex-1 bg-brand-600 hover:bg-brand-700 text-white text-center font-bold text-xs py-2.5 rounded-lg shadow-sm">
-                                Test Link <i class="fa-solid fa-external-link-alt ml-1"></i>
-                            </a>
-                        </div>
+    <!-- Professional SaaS Footer -->
+    <footer class="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">
+        <div class="container mx-auto px-4 lg:px-8 max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <!-- Col 1: Brand -->
+                <div class="space-y-4 md:col-span-1">
+                    <img src="assets/logo.jpg" 
+                         onerror="this.onerror=null; this.src='assets/mapranker-tech-local-seo-bahrain-logo.png.jpg';"
+                         alt="MapRanker Tech" 
+                         class="h-10 w-auto object-contain rounded-lg">
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Bahrain's premier Google Maps optimization & Python local SEO automation agency.
+                    </p>
+                    <div class="text-xs text-brand-400 font-mono font-semibold">
+                        📍 Seef District, Manama, Kingdom of Bahrain
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-900 text-xs">
-        <div class="container mx-auto px-4 lg:px-8 max-w-6xl flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-center md:text-left space-y-1">
-                <span class="font-black text-white text-base">MapRanker<span class="text-brand-400">.tech</span></span>
-                <p class="text-[11px] text-slate-500">GCC #1 Google Maps Optimization & Python Local SEO Engine. Serving Manama, Seef, Riffa & Muharraq.</p>
+                <!-- Col 2: Quick Links -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white">Platform Links</h4>
+                    <ul class="space-y-2 text-xs text-slate-400">
+                        <li><a href="#audit" class="hover:text-brand-400 transition">Instant Local Audit</a></li>
+                        <li><a href="#competitor" class="hover:text-brand-400 transition">Competitor Battle</a></li>
+                        <li><a href="#checklist" class="hover:text-brand-400 transition">SEO Health Check</a></li>
+                        <li><a href="#heatmap" class="hover:text-brand-400 transition">Geo-Grid Heatmap</a></li>
+                        <li><a href="#pricing" class="hover:text-brand-400 transition">Pricing & Packages</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Bahrain Target Areas -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white">Target Markets</h4>
+                    <ul class="space-y-2 text-xs text-slate-400">
+                        <li>Manama City Center</li>
+                        <li>Seef District Business Hub</li>
+                        <li>Riffa & East Riffa</li>
+                        <li>Muharraq & Amwaj Islands</li>
+                        <li>Saar & Janabiya</li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Contact & WhatsApp -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white">Direct Support</h4>
+                    <p class="text-xs text-slate-400">Speak directly with our Bahrain growth engineers via WhatsApp.</p>
+                    <a :href="`https://wa.me/${whatsappNum}?text=Hi%20MapRanker!%20I%20have%20a%20question%20about%20local%20SEO.`" target="_blank"
+                       class="inline-flex items-center space-x-2 space-x-reverse bg-brand-500 hover:bg-brand-600 text-slate-950 font-black text-xs uppercase px-4 py-2.5 rounded-xl transition shadow-md">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                        <span>+973 3536 3541</span>
+                    </a>
+                </div>
             </div>
-            <div class="flex space-x-6 space-x-reverse text-slate-400">
-                <a href="#audit" class="hover:text-brand-400 transition">Audit</a>
-                <a href="#heatmap" class="hover:text-brand-400 transition">Heatmap</a>
-                <a href="#services" class="hover:text-brand-400 transition">Services</a>
-                <a href="#pricing" class="hover:text-brand-400 transition">Pricing</a>
-            </div>
-            <div class="text-[11px] text-slate-600">
-                &copy; 2026 MapRanker.tech. All rights reserved.
+
+            <div class="pt-8 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p>&copy; 2026 MapRanker.tech. All rights reserved. Engineered for Bahrain Local SEO.</p>
+                <div class="flex space-x-4 space-x-reverse text-xs">
+                    <a href="#" class="hover:text-slate-300 transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-slate-300 transition">Terms of Service</a>
+                    <a href="#" class="hover:text-slate-300 transition">Sitemap</a>
+                </div>
             </div>
         </div>
     </footer>
