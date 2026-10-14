@@ -54,9 +54,9 @@
             background-size: 32px 32px;
         }
         .glass-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.95) 100%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.98) 100%);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(226, 232, 240, 0.8);
+            border: 1px solid rgba(226, 232, 240, 0.9);
             box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
         }
         .glow-emerald {
@@ -293,7 +293,7 @@
                     </div>
 
                     <button type="submit" :disabled="auditRunning"
-                            class="w-full bg-gradient-to-r from-brand-500 via-emerald-500 to-teal-600 hover:from-brand-600 hover:to-teal-700 text-white font-black py-4 rounded-xl text-sm uppercase tracking-wider shadow-xl transition flex items-center justify-center space-x-2 space-x-reverse cursor-pointer">
+                            class="w-full bg-gradient-to-r from-brand-500 via-emerald-500 to-teal-600 hover:from-brand-600 hover:to-teal-700 text-white font-black py-4 rounded-xl text-sm uppercase tracking-wider shadow-xl transition flex items-center justify-center space-x-2 cursor-pointer">
                         <i x-show="!auditRunning" class="fa-solid fa-bolt"></i>
                         <i x-show="auditRunning" class="fa-solid fa-spinner fa-spin"></i>
                         <span x-text="auditRunning ? 'Scanning Bahrain Google Map Grid...' : 'Analyze My Local Map Rank Now'"></span>
@@ -337,7 +337,7 @@
         </div>
     </section>
 
-    <!-- NEW FEATURE 1: Live Competitor Head-to-Head Comparison Tool -->
+    <!-- FEATURE 1: Live Competitor Head-to-Head Comparison Tool -->
     <section id="competitor" class="py-20 bg-white border-y border-slate-200">
         <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
             <div class="text-center max-w-2xl mx-auto mb-14">
@@ -350,20 +350,22 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Your Business / Brand Name:</label>
-                        <input type="text" x-model="compMyBiz" placeholder="e.g. Seef Dental Clinic"
+                        <input type="text" x-model="compMyBiz" placeholder="e.g. Royal Bahrain Hospital Dental"
                                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3.5 text-xs text-slate-900 focus:outline-none focus:border-brand-500 shadow-xs">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Top Local Competitor Name:</label>
-                        <input type="text" x-model="compRivalBiz" placeholder="e.g. Bahrain Specialist Hospital"
+                        <input type="text" x-model="compRivalBiz" placeholder="e.g. Seef Dental"
                                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3.5 text-xs text-slate-900 focus:outline-none focus:border-brand-500 shadow-xs">
                     </div>
                 </div>
 
+                <!-- FIXED BUTTON WITH CLEAR WHITE TEXT & SOLID STYLING -->
                 <button @click="runCompetitorCheck()" :disabled="compRunning"
-                        class="w-full bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 text-white font-black py-4 px-6 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2 cursor-pointer"></button>
+                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-4 px-6 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2 cursor-pointer">
                     <i x-show="compRunning" class="fa-solid fa-spinner fa-spin text-white"></i>
-                    <span class="text-white font-black" x-text="compRunning ? 'Analyzing Competitor Backlinks & Citations...' : 'Run Comparative Rival Battle Scan'"></span>
+                    <i x-show="!compRunning" class="fa-solid fa-swords text-white"></i>
+                    <span class="text-white font-black text-xs uppercase tracking-wider" x-text="compRunning ? 'Analyzing Competitor Backlinks & Citations...' : 'Run Comparative Rival Battle Scan'"></span>
                 </button>
 
                 <!-- Comparison Result Matrix -->
@@ -395,7 +397,7 @@
         </div>
     </section>
 
-    <!-- NEW FEATURE 2: 60-Second Local SEO Health Checklist & Scorecard -->
+    <!-- FEATURE 2: 60-Second Local SEO Health Checklist & Scorecard -->
     <section id="checklist" class="py-20 bg-slate-100/70 border-t border-slate-200">
         <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
             <div class="text-center max-w-2xl mx-auto mb-14">
