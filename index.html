@@ -6,7 +6,7 @@
     <title>MapRanker.tech | GCC #1 Google Maps Optimization & Growth Engine</title>
     <meta name="description" content="Dominate Google Maps & Local Search in Bahrain. High-converting local lead engine for businesses in Manama, Seef, Riffa, and Muharraq.">
 
-    <!-- Favicon Links with Fallbacks -->
+    <!-- Favicon Links -->
     <link rel="icon" type="image/jpeg" href="assets/favicon.jpg">
     <link rel="icon" type="image/jpeg" href="assets/mapranker-favicon-32x32.png.jpg">
 
@@ -54,7 +54,7 @@
             background-size: 32px 32px;
         }
         .glass-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.98) 100%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 1) 100%);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(226, 232, 240, 0.9);
             box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
@@ -139,45 +139,59 @@
             return this.currency === 'BHD' ? val.toLocaleString() + ' BHD' : '$' + Math.round(val / this.exchangeRate).toLocaleString();
         },
 
+        openWhatsApp(customText) {
+            let msg = encodeURIComponent(customText || 'Hi MapRanker Team! I am interested in growing my Google Maps business ranking in Bahrain.');
+            window.open(`https://wa.me/${this.whatsappNum}?text=${msg}`, '_blank');
+        },
+
         runAudit() {
-            if(!this.auditUrl) return;
+            if(!this.auditUrl) {
+                alert('Please enter your business name or website URL');
+                return;
+            }
             this.auditRunning = true;
             this.auditStep = 1;
             
-            setTimeout(() => { this.auditStep = 2; }, 1000);
-            setTimeout(() => { this.auditStep = 3; }, 2000);
+            setTimeout(() => { this.auditStep = 2; }, 800);
+            setTimeout(() => { this.auditStep = 3; }, 1600);
             setTimeout(() => { 
                 this.auditStep = 4;
                 this.auditRunning = false;
                 this.auditComplete = true;
                 this.auditScore = Math.floor(Math.random() * (58 - 38 + 1)) + 38;
-            }, 3200);
+            }, 2500);
         },
 
         runCompetitorCheck() {
-            if(!this.compMyBiz || !this.compRivalBiz) return;
+            if(!this.compMyBiz || !this.compRivalBiz) {
+                alert('Please enter both your business name and competitor name.');
+                return;
+            }
             this.compRunning = true;
+            this.compComplete = false;
             setTimeout(() => {
                 this.compRunning = false;
                 this.compComplete = true;
                 this.myScore = Math.floor(Math.random() * (45 - 25 + 1)) + 25;
                 this.rivalScore = Math.floor(Math.random() * (95 - 80 + 1)) + 80;
-            }, 2000);
+            }, 1800);
         },
 
         sendWhatsAppAudit() {
-            let msg = `Hi MapRanker Team! I ran a Google Maps audit for my business:%0A%0A` +
-                    `*Business / URL:* ${this.auditUrl}%0A` +
-                    `*Name:* ${this.auditName || 'N/A'}%0A` +
-                    `*Phone:* ${this.auditPhone || 'N/A'}%0A` +
-                    `*Email:* ${this.auditEmail || 'N/A'}%0A` +
-                    `*Audit Score:* ${this.auditScore}/100%0A%0A` +
-                    `Please send me the full 12-page PDF Local SEO breakdown report on WhatsApp!`;
-            window.open(`https://wa.me/${this.whatsappNum}?text=${msg}`, '_blank');
+            let text = `Hi MapRanker Team! I ran a Google Maps audit for my business:\n\n` +
+                       `*Business / URL:* ${this.auditUrl}\n` +
+                       `*Name:* ${this.auditName || 'N/A'}\n` +
+                       `*Phone:* ${this.auditPhone || 'N/A'}\n` +
+                       `*Audit Score:* ${this.auditScore}/100\n\n` +
+                       `Please send me the full PDF report!`;
+            this.openWhatsApp(text);
         },
 
         generateReviewTool() {
-            if(!this.reviewBizName) return;
+            if(!this.reviewBizName) {
+                alert('Please enter your business name');
+                return;
+            }
             let query = encodeURIComponent(this.reviewBizName.trim() + " Bahrain");
             this.generatedReviewUrl = `https://www.google.com/maps/search/?api=1&query=${query}`;
             this.reviewLinkGenerated = true;
@@ -214,8 +228,8 @@
             <!-- Brand Logo -->
             <a href="#" class="flex items-center group">
                 <img src="assets/logo.jpg" 
-                     onerror="this.onerror=null; this.src='assets/mapranker-tech-local-seo-bahrain-logo.png.jpg';"
-                     alt="MapRanker Tech - Local SEO Agency Bahrain" 
+                     onerror="this.onerror=null; this.src='assets/mapranker-favicon-32x32.png.jpg';"
+                     alt="MapRanker Tech" 
                      class="h-10 md:h-12 w-auto object-contain transition transform group-hover:scale-105 rounded-lg">
             </a>
 
@@ -229,13 +243,12 @@
                 <a href="#pricing" class="hover:text-brand-600 transition">Pricing</a>
             </nav>
 
-            <!-- CTA Button -->
-            <a :href="`https://wa.me/${whatsappNum}?text=Hi%20MapRanker!%20I%20want%20to%20rank%20my%20business%20top%20on%20Google%20Maps%20in%20Bahrain.`"
-               target="_blank"
-               class="bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl shadow-lg shadow-brand-500/20 transition flex items-center space-x-2 space-x-reverse">
+            <!-- WhatsApp Direct CTA -->
+            <button @click="openWhatsApp('Hi MapRanker! I want to consult with a growth specialist regarding my Google Maps ranking in Bahrain.')"
+               class="bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl shadow-lg shadow-brand-500/20 transition flex items-center space-x-2 space-x-reverse cursor-pointer">
                 <i class="fa-brands fa-whatsapp text-base"></i>
-                <span>Consult Growth Specialist</span>
-            </a>
+                <span>Consult Specialist</span>
+            </button>
         </div>
     </header>
 
@@ -245,7 +258,6 @@
 
         <div class="container mx-auto px-4 lg:px-8 relative z-10">
             <div class="max-w-4xl mx-auto text-center space-y-6">
-                <!-- Location Badge -->
                 <div class="inline-flex items-center space-x-2 space-x-reverse px-4 py-2 rounded-full bg-emerald-50 border border-brand-500/30 text-brand-700 text-xs font-bold shadow-sm">
                     <i class="fa-solid fa-location-dot animate-bounce"></i>
                     <span>#1 Enterprise Local SEO Engine for Bahrain & GCC</span>
@@ -260,13 +272,12 @@
                     We engineer automated local search dominance for Dental Clinics, Real Estate Firms, Automotive Centers, and Fine Dining using Python Grid Scraping & Google Maps SEO.
                 </p>
 
-                <!-- City Target Badges -->
+                <!-- City Badges -->
                 <div class="flex flex-wrap justify-center gap-2 pt-2 text-xs font-semibold text-slate-600">
                     <span class="bg-white px-3.5 py-1.5 rounded-lg border border-slate-200 shadow-xs">📍 Manama</span>
                     <span class="bg-white px-3.5 py-1.5 rounded-lg border border-slate-200 shadow-xs">📍 Seef District</span>
                     <span class="bg-white px-3.5 py-1.5 rounded-lg border border-slate-200 shadow-xs">📍 Riffa</span>
                     <span class="bg-white px-3.5 py-1.5 rounded-lg border border-slate-200 shadow-xs">📍 Muharraq</span>
-                    <span class="bg-white px-3.5 py-1.5 rounded-lg border border-slate-200 shadow-xs">📍 Amwaj Islands</span>
                     <span class="bg-white px-3.5 py-1.5 rounded-lg border border-slate-200 shadow-xs">📍 Saar</span>
                 </div>
             </div>
@@ -293,10 +304,10 @@
                     </div>
 
                     <button type="submit" :disabled="auditRunning"
-                            class="w-full bg-gradient-to-r from-brand-500 via-emerald-500 to-teal-600 hover:from-brand-600 hover:to-teal-700 text-white font-black py-4 rounded-xl text-sm uppercase tracking-wider shadow-xl transition flex items-center justify-center space-x-2 cursor-pointer">
-                        <i x-show="!auditRunning" class="fa-solid fa-bolt"></i>
-                        <i x-show="auditRunning" class="fa-solid fa-spinner fa-spin"></i>
-                        <span x-text="auditRunning ? 'Scanning Bahrain Google Map Grid...' : 'Analyze My Local Map Rank Now'"></span>
+                            class="w-full bg-gradient-to-r from-brand-500 via-emerald-500 to-teal-600 hover:from-brand-600 hover:to-teal-700 text-white font-black py-4 rounded-xl text-xs uppercase tracking-wider shadow-xl transition flex items-center justify-center space-x-2 cursor-pointer">
+                        <i x-show="!auditRunning" class="fa-solid fa-bolt text-white"></i>
+                        <i x-show="auditRunning" class="fa-solid fa-spinner fa-spin text-white"></i>
+                        <span class="text-white font-black" x-text="auditRunning ? 'Scanning Bahrain Google Map Grid...' : 'Analyze My Local Map Rank Now'"></span>
                     </button>
                 </form>
 
@@ -328,7 +339,7 @@
                             </div>
                             <button @click="sendWhatsAppAudit()" class="w-full md:w-auto bg-brand-500 hover:bg-brand-600 text-white font-black text-xs uppercase px-5 py-3.5 rounded-xl flex items-center justify-center space-x-2 space-x-reverse whitespace-nowrap shadow-lg cursor-pointer">
                                 <i class="fa-solid fa-file-pdf text-base"></i>
-                                <span>Get Full 12-Page PDF Report on WhatsApp</span>
+                                <span>Get Full Report on WhatsApp</span>
                             </button>
                         </div>
                     </template>
@@ -337,7 +348,7 @@
         </div>
     </section>
 
-    <!-- FEATURE 1: Live Competitor Head-to-Head Comparison Tool -->
+    <!-- COMPETITOR COMPARISON TOOL -->
     <section id="competitor" class="py-20 bg-white border-y border-slate-200">
         <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
             <div class="text-center max-w-2xl mx-auto mb-14">
@@ -360,16 +371,16 @@
                     </div>
                 </div>
 
-                <!-- FIXED BUTTON WITH CLEAR WHITE TEXT & SOLID STYLING -->
-                <button @click="runCompetitorCheck()" :disabled="compRunning"
+                <!-- FULLY WORKING SOLID BUTTON -->
+                <button type="button" @click="runCompetitorCheck()" :disabled="compRunning"
                         class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-4 px-6 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2 cursor-pointer">
-                    <i x-show="compRunning" class="fa-solid fa-spinner fa-spin text-white"></i>
-                    <i x-show="!compRunning" class="fa-solid fa-swords text-white"></i>
+                    <i x-show="compRunning" class="fa-solid fa-spinner fa-spin text-white text-base mr-2"></i>
+                    <i x-show="!compRunning" class="fa-solid fa-bolt text-white text-base mr-2"></i>
                     <span class="text-white font-black text-xs uppercase tracking-wider" x-text="compRunning ? 'Analyzing Competitor Backlinks & Citations...' : 'Run Comparative Rival Battle Scan'"></span>
                 </button>
 
                 <!-- Comparison Result Matrix -->
-                <div x-show="compComplete" x-cloak class="pt-6 border-t border-slate-200 space-y-6 animate-fadeIn">
+                <div x-show="compComplete" x-cloak class="pt-6 border-t border-slate-200 space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- My Biz Stats -->
                         <div class="bg-rose-50 border border-rose-200 p-6 rounded-2xl text-center space-y-2">
@@ -387,17 +398,17 @@
 
                     <div class="text-center bg-slate-900 text-white p-6 rounded-2xl space-y-3">
                         <p class="text-xs font-semibold">⚠️ You are losing approx. 65% of potential client calls to this competitor every single week.</p>
-                        <a :href="`https://wa.me/${whatsappNum}?text=I%20want%20to%20outrank%20my%20competitor%20${encodeURIComponent(compRivalBiz)}%20for%20my%20business%20${encodeURIComponent(compMyBiz)}.`" target="_blank"
-                           class="inline-block bg-brand-500 hover:bg-brand-600 text-slate-950 font-black text-xs uppercase px-6 py-3 rounded-xl shadow-lg transition">
+                        <button @click="openWhatsApp(`I want to outrank my competitor ${compRivalBiz} for my business ${compMyBiz}.`)"
+                                class="inline-block bg-brand-500 hover:bg-brand-600 text-slate-950 font-black text-xs uppercase px-6 py-3 rounded-xl shadow-lg transition cursor-pointer">
                             Deploy Strategy to Outrank Competitor Now
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FEATURE 2: 60-Second Local SEO Health Checklist & Scorecard -->
+    <!-- SEO HEALTH CHECKLIST -->
     <section id="checklist" class="py-20 bg-slate-100/70 border-t border-slate-200">
         <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
             <div class="text-center max-w-2xl mx-auto mb-14">
@@ -429,22 +440,21 @@
                     </label>
                 </div>
 
-                <!-- Live Score Card -->
                 <div class="bg-slate-900 text-white p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
                     <div>
                         <span class="text-xs text-slate-400 uppercase font-semibold">Your Local SEO Health Score:</span>
                         <div class="text-3xl font-black font-mono text-brand-400 mt-1" x-text="healthScore + '% Optimized'"></div>
                     </div>
-                    <a :href="`https://wa.me/${whatsappNum}?text=I%20checked%20my%20Local%20SEO%20health%20score%20and%20it%20is%20${healthScore}%25.%20I%20want%20to%20fix%20my%20gaps.`" target="_blank"
-                       class="w-full md:w-auto bg-brand-500 hover:bg-brand-600 text-slate-950 font-black text-xs uppercase px-6 py-3.5 rounded-xl shadow-lg text-center">
+                    <button @click="openWhatsApp(`I checked my Local SEO health score on MapRanker and it is ${healthScore}%. I want to fix my optimization gaps.`)"
+                            class="w-full md:w-auto bg-brand-500 hover:bg-brand-600 text-slate-950 font-black text-xs uppercase px-6 py-3.5 rounded-xl shadow-lg text-center cursor-pointer">
                         Fix My Gaps via WhatsApp
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Interactive 3x3 Geo-Grid Rank Heatmap Visualizer -->
+    <!-- 3x3 Geo-Grid Rank Heatmap Visualizer -->
     <section id="heatmap" class="py-20 bg-white border-y border-slate-200 shadow-xs">
         <div class="container mx-auto px-4 lg:px-8 max-w-6xl">
             <div class="text-center max-w-2xl mx-auto mb-14">
@@ -497,11 +507,11 @@
                         <p class="text-xs text-slate-600 leading-relaxed">Where competitors steal your local clients because your profile lacks local geotagged citations.</p>
                     </div>
 
-                    <a :href="`https://wa.me/${whatsappNum}?text=I%20want%20a%20Geo-Grid%20Heatmap%20Scan%20for%20my%20Bahrain%20business.`" target="_blank"
-                       class="w-full bg-slate-900 hover:bg-slate-800 text-brand-400 font-bold text-xs py-3.5 px-4 rounded-xl border border-slate-800 flex items-center justify-center space-x-2 space-x-reverse transition shadow-md">
+                    <button @click="openWhatsApp('I want a custom Geo-Grid Heatmap Scan for my business in Bahrain.')"
+                       class="w-full bg-slate-900 hover:bg-slate-800 text-brand-400 font-bold text-xs py-3.5 px-4 rounded-xl border border-slate-800 flex items-center justify-center space-x-2 space-x-reverse transition shadow-md cursor-pointer">
                         <i class="fa-solid fa-map text-sm"></i>
                         <span>Request Custom Geo-Grid Heatmap Scan</span>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -517,7 +527,6 @@
             </div>
 
             <div class="glass-card p-8 md:p-12 rounded-3xl border border-slate-200 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <!-- Sliders Controls -->
                 <div class="lg:col-span-7 space-y-6">
                     <div>
                         <div class="flex justify-between items-center mb-2">
@@ -541,7 +550,6 @@
                     </div>
                 </div>
 
-                <!-- Calculation Result Box -->
                 <div class="lg:col-span-5 bg-slate-900 text-white p-8 rounded-3xl space-y-6 shadow-xl border border-slate-800 text-center">
                     <div>
                         <span class="text-xs text-slate-400 uppercase tracking-widest font-semibold block">Estimated Monthly Revenue Loss</span>
@@ -553,16 +561,16 @@
                         <div class="text-4xl font-black font-mono text-brand-400 mt-1" x-text="potentialGain"></div>
                     </div>
 
-                    <a :href="`https://wa.me/${whatsappNum}?text=I%20want%20to%20recapture%20my%20lost%20map%20leads.%20Estimated%20Gain:%20${potentialGain}`" target="_blank"
-                       class="w-full bg-gradient-to-r from-brand-500 to-emerald-500 hover:from-brand-600 hover:to-emerald-600 text-slate-950 font-black text-xs uppercase py-4 rounded-xl shadow-lg block tracking-wider">
+                    <button @click="openWhatsApp(`I calculated my ROI on MapRanker. Estimated potential monthly gain: ${potentialGain}. I want to claim my market share.`)"
+                       class="w-full bg-gradient-to-r from-brand-500 to-emerald-500 hover:from-brand-600 hover:to-emerald-600 text-slate-950 font-black text-xs uppercase py-4 rounded-xl shadow-lg block tracking-wider cursor-pointer">
                         Claim Your Market Share Now
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Free Tools Section (Review Link Generator) -->
+    <!-- Review Link Generator Tool -->
     <section id="tools" class="py-20">
         <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
             <div class="text-center max-w-2xl mx-auto mb-14">
@@ -575,7 +583,7 @@
                 <div class="flex flex-col md:flex-row gap-3">
                     <input type="text" x-model="reviewBizName" placeholder="Enter Business Name (e.g. Seef Dental Bahrain)"
                            class="flex-1 bg-white border border-slate-300 rounded-xl px-4 py-3.5 text-xs text-slate-900 focus:outline-none focus:border-brand-500 shadow-xs">
-                    <button @click="generateReviewTool()"
+                    <button type="button" @click="generateReviewTool()"
                             class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-6 py-3.5 rounded-xl text-xs uppercase tracking-wider transition cursor-pointer shadow-md">
                         Generate Review Link
                     </button>
@@ -589,10 +597,10 @@
                         <a :href="generatedReviewUrl" target="_blank" class="bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-xs">
                             Test Link <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
                         </a>
-                        <a :href="`https://wa.me/?text=Hi!%20Please%20leave%20us%20a%205-star%20review%20here:%20${encodeURIComponent(generatedReviewUrl)}`" target="_blank"
-                           class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-xs">
+                        <button @click="openWhatsApp(`Hi! Please leave us a 5-star review on Google Maps: ${generatedReviewUrl}`)"
+                           class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-xs cursor-pointer">
                             Share via WhatsApp <i class="fa-brands fa-whatsapp ml-1"></i>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -626,13 +634,13 @@
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Monthly Ranking Report</li>
                         </ul>
                     </div>
-                    <a :href="`https://wa.me/${whatsappNum}?text=I%20want%20to%20get%20started%20with%20the%20Starter%20Local%20Package%20(150%20BHD).`" target="_blank"
-                       class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-xl uppercase tracking-wider text-center transition shadow-sm">
+                    <button @click="openWhatsApp('I want to get started with the Starter Local Package (150 BHD/mo).')"
+                       class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-xl uppercase tracking-wider text-center transition shadow-sm cursor-pointer">
                         Choose Starter
-                    </a>
+                    </button>
                 </div>
 
-                <!-- Pro Enterprise Package (Highlighted) -->
+                <!-- Growth Engine (Highlighted) -->
                 <div class="glass-card p-8 rounded-3xl border-2 border-brand-500 space-y-6 flex flex-col justify-between shadow-xl relative bg-white">
                     <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-brand-500 to-emerald-600 text-white text-[10px] font-black uppercase px-4 py-1 rounded-full shadow-md tracking-wider">
                         Most Popular for Seef & Manama
@@ -654,13 +662,13 @@
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Dedicated Account Manager (+973)</li>
                         </ul>
                     </div>
-                    <a :href="`https://wa.me/${whatsappNum}?text=I%20want%20to%20get%20started%20with%20the%20Growth%20Engine%20Package%20(300%20BHD).`" target="_blank"
-                       class="w-full bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white font-black text-xs py-4 rounded-xl uppercase tracking-wider text-center shadow-lg transition">
+                    <button @click="openWhatsApp('I want to get started with the Growth Engine Package (300 BHD/mo).')"
+                       class="w-full bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white font-black text-xs py-4 rounded-xl uppercase tracking-wider text-center shadow-lg transition cursor-pointer">
                         Get Growth Engine
-                    </a>
+                    </button>
                 </div>
 
-                <!-- Multi-Location / Franchise -->
+                <!-- Custom / Franchise -->
                 <div class="glass-card p-8 rounded-3xl border border-slate-200 space-y-6 flex flex-col justify-between shadow-md">
                     <div class="space-y-4">
                         <div class="flex justify-between items-center">
@@ -677,10 +685,10 @@
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> 24/7 Priority Support & WhatsApp Funnels</li>
                         </ul>
                     </div>
-                    <a :href="`https://wa.me/${whatsappNum}?text=I%20want%20a%20Custom%20Multi-Branch%20Local%20SEO%20Proposal%20for%20Bahrain.`" target="_blank"
-                       class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-xl uppercase tracking-wider text-center transition shadow-sm">
+                    <button @click="openWhatsApp('I want a custom Multi-Branch Local SEO proposal for Bahrain.')"
+                       class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-xl uppercase tracking-wider text-center transition shadow-sm cursor-pointer">
                         Contact Enterprise
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -690,10 +698,9 @@
     <footer class="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">
         <div class="container mx-auto px-4 lg:px-8 max-w-6xl">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-                <!-- Col 1: Brand -->
                 <div class="space-y-4 md:col-span-1">
                     <img src="assets/logo.jpg" 
-                         onerror="this.onerror=null; this.src='assets/mapranker-tech-local-seo-bahrain-logo.png.jpg';"
+                         onerror="this.onerror=null; this.src='assets/mapranker-favicon-32x32.png.jpg';"
                          alt="MapRanker Tech" 
                          class="h-10 w-auto object-contain rounded-lg">
                     <p class="text-xs text-slate-400 leading-relaxed">
@@ -704,7 +711,6 @@
                     </div>
                 </div>
 
-                <!-- Col 2: Quick Links -->
                 <div class="space-y-3">
                     <h4 class="text-xs font-bold uppercase tracking-wider text-white">Platform Links</h4>
                     <ul class="space-y-2 text-xs text-slate-400">
@@ -716,7 +722,6 @@
                     </ul>
                 </div>
 
-                <!-- Col 3: Bahrain Target Areas -->
                 <div class="space-y-3">
                     <h4 class="text-xs font-bold uppercase tracking-wider text-white">Target Markets</h4>
                     <ul class="space-y-2 text-xs text-slate-400">
@@ -728,15 +733,14 @@
                     </ul>
                 </div>
 
-                <!-- Col 4: Contact & WhatsApp -->
                 <div class="space-y-3">
                     <h4 class="text-xs font-bold uppercase tracking-wider text-white">Direct Support</h4>
                     <p class="text-xs text-slate-400">Speak directly with our Bahrain growth engineers via WhatsApp.</p>
-                    <a :href="`https://wa.me/${whatsappNum}?text=Hi%20MapRanker!%20I%20have%20a%20question%20about%20local%20SEO.`" target="_blank"
-                       class="inline-flex items-center space-x-2 space-x-reverse bg-brand-500 hover:bg-brand-600 text-slate-950 font-black text-xs uppercase px-4 py-2.5 rounded-xl transition shadow-md">
-                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                    <button @click="openWhatsApp('Hi MapRanker Team!')"
+                       class="inline-flex items-center space-x-2 space-x-reverse bg-brand-500 hover:bg-brand-600 text-slate-950 font-black text-xs uppercase px-4 py-2.5 rounded-xl transition shadow-md cursor-pointer">
+                        <i class="fa-brands fa-whatsapp text-sm mr-1"></i>
                         <span>+973 3536 3541</span>
-                    </a>
+                    </button>
                 </div>
             </div>
 
@@ -745,7 +749,6 @@
                 <div class="flex space-x-4 space-x-reverse text-xs">
                     <a href="#" class="hover:text-slate-300 transition">Privacy Policy</a>
                     <a href="#" class="hover:text-slate-300 transition">Terms of Service</a>
-                    <a href="#" class="hover:text-slate-300 transition">Sitemap</a>
                 </div>
             </div>
         </div>
