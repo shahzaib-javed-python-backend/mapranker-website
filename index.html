@@ -361,9 +361,9 @@
                 </div>
 
                 <button @click="runCompetitorCheck()" :disabled="compRunning"
-                        class="w-full bg-slate-900 hover:bg-slate-800 text-white font-black py-4 rounded-xl text-xs uppercase tracking-wider transition shadow-md flex items-center justify-center space-x-2 cursor-pointer">
-                    <i x-show="compRunning" class="fa-solid fa-spinner fa-spin"></i>
-                    <span x-text="compRunning ? 'Analyzing Competitor Backlinks & Citations...' : 'Run Comparative Rival Battle Scan'"></span>
+                        class="w-full bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 text-white font-black py-4 px-6 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2 cursor-pointer"></button>
+                    <i x-show="compRunning" class="fa-solid fa-spinner fa-spin text-white"></i>
+                    <span class="text-white font-black" x-text="compRunning ? 'Analyzing Competitor Backlinks & Citations...' : 'Run Comparative Rival Battle Scan'"></span>
                 </button>
 
                 <!-- Comparison Result Matrix -->
