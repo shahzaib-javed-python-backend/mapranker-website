@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" id="main-html" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,7 +68,7 @@
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-2 space-x-reverse">
                 <span class="inline-block w-2 h-2 rounded-full bg-brand-400 animate-ping"></span>
-                <span>Serving Bahrain & GCC Region (Manama, Seef, Riffa, Muharraq)</span>
+                <span id="txt-announcement">Serving Bahrain & GCC Region (Manama, Seef, Riffa, Muharraq)</span>
             </div>
             
             <div class="flex items-center space-x-4 space-x-reverse">
@@ -76,6 +76,11 @@
                     <button onclick="setCurrency('BHD')" id="btn-bhd" class="bg-brand-500 text-slate-950 font-bold px-2 py-0.5 rounded transition">BHD</button>
                     <button onclick="setCurrency('USD')" id="btn-usd" class="text-slate-400 px-2 py-0.5 rounded transition">USD ($)</button>
                 </div>
+
+                <button onclick="toggleLanguage()" id="btn-lang" class="bg-slate-800 text-emerald-400 border border-slate-700 px-2.5 py-1 rounded-lg transition flex items-center gap-1 text-xs font-bold hover:bg-slate-700">
+                    <i class="fa-solid fa-globe"></i>
+                    <span id="txt-lang-btn">العربية</span>
+                </button>
             </div>
         </div>
     </div>
@@ -91,18 +96,18 @@
             </a>
 
             <nav class="hidden lg:flex items-center space-x-7 space-x-reverse font-semibold text-xs tracking-wider uppercase text-slate-700">
-                <a href="#audit" class="hover:text-brand-600 transition">Instant Audit</a>
-                <a href="#competitor" class="hover:text-brand-600 transition">Competitor Battle</a>
-                <a href="#checklist" class="hover:text-brand-600 transition">SEO Health Check</a>
-                <a href="#heatmap" class="hover:text-brand-600 transition">Geo-Grid</a>
-                <a href="#calculator" class="hover:text-brand-600 transition">ROI Engine</a>
-                <a href="#pricing" class="hover:text-brand-600 transition">Pricing</a>
+                <a href="#audit" id="nav-audit" class="hover:text-brand-600 transition">Instant Audit</a>
+                <a href="#competitor" id="nav-competitor" class="hover:text-brand-600 transition">Competitor Battle</a>
+                <a href="#checklist" id="nav-checklist" class="hover:text-brand-600 transition">SEO Health Check</a>
+                <a href="#heatmap" id="nav-heatmap" class="hover:text-brand-600 transition">Geo-Grid</a>
+                <a href="#calculator" id="nav-calculator" class="hover:text-brand-600 transition">ROI Engine</a>
+                <a href="#pricing" id="nav-pricing" class="hover:text-brand-600 transition">Pricing</a>
             </nav>
 
             <button onclick="openWhatsApp('Hi MapRanker! I want to consult with a growth specialist regarding my Google Maps ranking in Bahrain.')"
                class="bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl shadow-lg shadow-brand-500/20 transition flex items-center space-x-2 space-x-reverse cursor-pointer">
                 <i class="fa-brands fa-whatsapp text-base"></i>
-                <span>Consult Specialist</span>
+                <span id="btn-consult">Consult Specialist</span>
             </button>
         </div>
     </header>
@@ -115,15 +120,15 @@
             <div class="max-w-4xl mx-auto text-center space-y-6">
                 <div class="inline-flex items-center space-x-2 space-x-reverse px-4 py-2 rounded-full bg-emerald-50 border border-brand-500/30 text-brand-700 text-xs font-bold shadow-sm">
                     <i class="fa-solid fa-location-dot animate-bounce"></i>
-                    <span>#1 Enterprise Local SEO Engine for Bahrain & GCC</span>
+                    <span id="hero-badge">#1 Enterprise Local SEO Engine for Bahrain & GCC</span>
                 </div>
 
                 <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight text-slate-900">
-                    <span>Capture Every High-Paying Walk-In Client in</span>
-                    <span class="gradient-text block mt-1">Bahrain & Seef District</span>
+                    <span id="hero-title-1">Capture Every High-Paying Walk-In Client in</span>
+                    <span id="hero-title-2" class="gradient-text block mt-1">Bahrain & Seef District</span>
                 </h1>
 
-                <p class="text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                <p id="hero-subtitle" class="text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
                     We engineer automated local search dominance for Dental Clinics, Real Estate Firms, Automotive Centers, and Fine Dining using Python Grid Scraping & Google Maps SEO.
                 </p>
 
@@ -139,8 +144,8 @@
             <!-- Live Audit Simulator Box -->
             <div id="audit" class="mt-14 max-w-3xl mx-auto glass-card p-6 md:p-10 rounded-3xl border border-brand-500/20 shadow-2xl relative glow-emerald">
                 <div class="text-center mb-6">
-                    <h3 class="text-2xl font-black text-slate-900">Run Instant Google Maps Local Rank Audit</h3>
-                    <p class="text-xs text-slate-600 mt-1">Enter your Google Business Name or Website URL to trigger automatic competitor grid scan.</p>
+                    <h3 id="audit-head" class="text-2xl font-black text-slate-900">Run Instant Google Maps Local Rank Audit</h3>
+                    <p id="audit-desc" class="text-xs text-slate-600 mt-1">Enter your Google Business Name or Website URL to trigger automatic competitor grid scan.</p>
                 </div>
 
                 <form onsubmit="runAudit(event)" class="space-y-4">
@@ -160,7 +165,7 @@
                     <button type="submit" id="audit-btn"
                             class="w-full bg-gradient-to-r from-brand-500 via-emerald-500 to-teal-600 hover:from-brand-600 hover:to-teal-700 text-white font-black py-4 rounded-xl text-xs uppercase tracking-wider shadow-xl transition flex items-center justify-center space-x-2 cursor-pointer">
                         <i class="fa-solid fa-bolt text-white mr-2"></i>
-                        <span class="text-white font-black">Analyze My Local Map Rank Now</span>
+                        <span id="txt-audit-btn" class="text-white font-black">Analyze My Local Map Rank Now</span>
                     </button>
                 </form>
 
@@ -172,13 +177,13 @@
                                 <span id="audit-score-val">42</span>/100
                             </div>
                             <div>
-                                <h4 class="font-bold text-slate-900 text-sm">Audit Scan Complete: Missing Top 3 Pack</h4>
-                                <p class="text-xs text-slate-600 mt-1">Your business is invisible to 68% of walk-in search clients in Bahrain.</p>
+                                <h4 id="audit-res-title" class="font-bold text-slate-900 text-sm">Audit Scan Complete: Missing Top 3 Pack</h4>
+                                <p id="audit-res-sub" class="text-xs text-slate-600 mt-1">Your business is invisible to 68% of walk-in search clients in Bahrain.</p>
                             </div>
                         </div>
                         <button type="button" onclick="sendAuditWhatsApp()" class="w-full md:w-auto bg-brand-500 hover:bg-brand-600 text-white font-black text-xs uppercase px-5 py-3.5 rounded-xl flex items-center justify-center space-x-2 whitespace-nowrap shadow-lg cursor-pointer">
                             <i class="fa-solid fa-file-pdf text-base mr-2"></i>
-                            <span>Get Full Report on WhatsApp</span>
+                            <span id="txt-audit-pdf-btn">Get Full Report on WhatsApp</span>
                         </button>
                     </div>
                 </div>
@@ -190,50 +195,48 @@
     <section id="competitor" class="py-20 bg-white border-y border-slate-200">
         <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
             <div class="text-center max-w-2xl mx-auto mb-14">
-                <span class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Head-to-Head Rival Battle</span>
-                <h2 class="text-3xl font-black text-slate-900 mt-3">Compare Your Map Rank Against Your #1 Competitor</h2>
-                <p class="text-xs text-slate-600 mt-2">See exactly how many reviews, citations, and local ranking power your top competitor is stealing from you.</p>
+                <span id="comp-badge" class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Head-to-Head Rival Battle</span>
+                <h2 id="comp-head" class="text-3xl font-black text-slate-900 mt-3">Compare Your Map Rank Against Your #1 Competitor</h2>
+                <p id="comp-sub" class="text-xs text-slate-600 mt-2">See exactly how many reviews, citations, and local ranking power your top competitor is stealing from you.</p>
             </div>
 
             <div class="glass-card p-8 md:p-12 rounded-3xl border border-slate-200 shadow-xl space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Your Business / Brand Name:</label>
+                        <label id="lbl-my-biz" class="block text-xs font-bold text-slate-700 uppercase mb-2">Your Business / Brand Name:</label>
                         <input type="text" id="comp-my" placeholder="e.g. Royal Bahrain Hospital Dental"
                                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3.5 text-xs text-slate-900 focus:outline-none focus:border-brand-500 shadow-xs">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Top Local Competitor Name:</label>
+                        <label id="lbl-rival-biz" class="block text-xs font-bold text-slate-700 uppercase mb-2">Top Local Competitor Name:</label>
                         <input type="text" id="comp-rival" placeholder="e.g. Seef Dental"
                                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3.5 text-xs text-slate-900 focus:outline-none focus:border-brand-500 shadow-xs">
                     </div>
                 </div>
 
-                <!-- 100% WORKING BUTTON -->
                 <button type="button" onclick="runCompetitorCheck()" id="comp-btn"
                         class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-4 px-6 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2 cursor-pointer">
                     <i class="fa-solid fa-bolt text-white text-base mr-2"></i>
-                    <span class="text-white font-black text-xs uppercase tracking-wider">Run Comparative Rival Battle Scan</span>
+                    <span id="txt-comp-btn" class="text-white font-black text-xs uppercase tracking-wider">Run Comparative Rival Battle Scan</span>
                 </button>
 
-                <!-- Comparison Result Matrix -->
                 <div id="comp-results" class="hidden pt-6 border-t border-slate-200 space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-rose-50 border border-rose-200 p-6 rounded-2xl text-center space-y-2">
                             <span class="text-xs font-bold text-rose-700 uppercase" id="display-my-biz">Your Business</span>
                             <div class="text-3xl font-black font-mono text-rose-600" id="display-my-score">32/100</div>
-                            <p class="text-xs text-slate-600">Low review velocity, missing Seef district geotagged citations, invisible on mobile map pack.</p>
+                            <p id="comp-my-desc" class="text-xs text-slate-600">Low review velocity, missing Seef district geotagged citations, invisible on mobile map pack.</p>
                         </div>
                         <div class="bg-emerald-50 border border-emerald-300 p-6 rounded-2xl text-center space-y-2">
                             <span class="text-xs font-bold text-emerald-800 uppercase" id="display-rival-biz">Top Competitor</span>
                             <div class="text-3xl font-black font-mono text-brand-600" id="display-rival-score">88/100</div>
-                            <p class="text-xs text-slate-600">Dominating top 3 spots with 180+ 5-star reviews and robust local schema authority.</p>
+                            <p id="comp-rival-desc" class="text-xs text-slate-600">Dominating top 3 spots with 180+ 5-star reviews and robust local schema authority.</p>
                         </div>
                     </div>
 
                     <div class="text-center bg-slate-900 text-white p-6 rounded-2xl space-y-3">
-                        <p class="text-xs font-semibold">⚠️ You are losing approx. 65% of potential client calls to this competitor every single week.</p>
-                        <button type="button" onclick="sendCompetitorWhatsApp()"
+                        <p id="comp-warn" class="text-xs font-semibold">⚠️ You are losing approx. 65% of potential client calls to this competitor every single week.</p>
+                        <button type="button" onclick="sendCompetitorWhatsApp()" id="btn-comp-whatsapp"
                                 class="inline-block bg-brand-500 hover:bg-brand-600 text-slate-950 font-black text-xs uppercase px-6 py-3 rounded-xl shadow-lg transition cursor-pointer">
                             Deploy Strategy to Outrank Competitor Now
                         </button>
@@ -247,40 +250,40 @@
     <section id="checklist" class="py-20 bg-slate-100/70 border-t border-slate-200">
         <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
             <div class="text-center max-w-2xl mx-auto mb-14">
-                <span class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Interactive Scorecard</span>
-                <h2 class="text-3xl font-black text-slate-900 mt-3">60-Second Local SEO Health Checklist</h2>
-                <p class="text-xs text-slate-600 mt-2">Check the boxes below that apply to your business profile to reveal your instant optimization score.</p>
+                <span id="chk-badge" class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Interactive Scorecard</span>
+                <h2 id="chk-head" class="text-3xl font-black text-slate-900 mt-3">60-Second Local SEO Health Checklist</h2>
+                <p id="chk-sub" class="text-xs text-slate-600 mt-2">Check the boxes below that apply to your business profile to reveal your instant optimization score.</p>
             </div>
 
             <div class="glass-card p-8 md:p-10 rounded-3xl border border-slate-200 shadow-xl space-y-6">
                 <div class="space-y-4">
                     <label class="flex items-center space-x-3 space-x-reverse cursor-pointer bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
                         <input type="checkbox" id="chk-1" checked onchange="updateChecklist()" class="w-5 h-5 accent-brand-500 rounded">
-                        <span class="text-xs font-bold text-slate-800">Is your Google Business Profile fully verified with correct Bahrain category?</span>
+                        <span id="chk-txt-1" class="text-xs font-bold text-slate-800">Is your Google Business Profile fully verified with correct Bahrain category?</span>
                     </label>
 
                     <label class="flex items-center space-x-3 space-x-reverse cursor-pointer bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
                         <input type="checkbox" id="chk-2" onchange="updateChecklist()" class="w-5 h-5 accent-brand-500 rounded">
-                        <span class="text-xs font-bold text-slate-800">Do you receive at least 10 new Google 5-star reviews every month?</span>
+                        <span id="chk-txt-2" class="text-xs font-bold text-slate-800">Do you receive at least 10 new Google 5-star reviews every month?</span>
                     </label>
 
                     <label class="flex items-center space-x-3 space-x-reverse cursor-pointer bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
                         <input type="checkbox" id="chk-3" onchange="updateChecklist()" class="w-5 h-5 accent-brand-500 rounded">
-                        <span class="text-xs font-bold text-slate-800">Are you ranking in the Top 3 map pack for customers searching from Seef or Manama?</span>
+                        <span id="chk-txt-3" class="text-xs font-bold text-slate-800">Are you ranking in the Top 3 map pack for customers searching from Seef or Manama?</span>
                     </label>
 
                     <label class="flex items-center space-x-3 space-x-reverse cursor-pointer bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
                         <input type="checkbox" id="chk-4" onchange="updateChecklist()" class="w-5 h-5 accent-brand-500 rounded">
-                        <span class="text-xs font-bold text-slate-800">Do you have automated WhatsApp lead routing active on your website & GMB?</span>
+                        <span id="chk-txt-4" class="text-xs font-bold text-slate-800">Do you have automated WhatsApp lead routing active on your website & GMB?</span>
                     </label>
                 </div>
 
                 <div class="bg-slate-900 text-white p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
                     <div>
-                        <span class="text-xs text-slate-400 uppercase font-semibold">Your Local SEO Health Score:</span>
+                        <span id="lbl-score-title" class="text-xs text-slate-400 uppercase font-semibold">Your Local SEO Health Score:</span>
                         <div class="text-3xl font-black font-mono text-brand-400 mt-1" id="health-score-text">40% Optimized</div>
                     </div>
-                    <button type="button" onclick="sendChecklistWhatsApp()"
+                    <button type="button" onclick="sendChecklistWhatsApp()" id="btn-chk-whatsapp"
                             class="w-full md:w-auto bg-brand-500 hover:bg-brand-600 text-slate-950 font-black text-xs uppercase px-6 py-3.5 rounded-xl shadow-lg text-center cursor-pointer">
                         Fix My Gaps via WhatsApp
                     </button>
@@ -293,16 +296,16 @@
     <section id="calculator" class="py-20 bg-white border-y border-slate-200">
         <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
             <div class="text-center max-w-2xl mx-auto mb-14">
-                <span class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Interactive Revenue Calculator</span>
-                <h2 class="text-3xl font-black text-slate-900 mt-3">Calculate What Missing Top 3 Map Rank Costs You</h2>
-                <p class="text-xs text-slate-600 mt-2">Adjust your average customer deal value and monthly lost map leads to see your revenue potential.</p>
+                <span id="roi-badge" class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Interactive Revenue Calculator</span>
+                <h2 id="roi-head" class="text-3xl font-black text-slate-900 mt-3">Calculate What Missing Top 3 Map Rank Costs You</h2>
+                <p id="roi-sub" class="text-xs text-slate-600 mt-2">Adjust your average customer deal value and monthly lost map leads to see your revenue potential.</p>
             </div>
 
             <div class="glass-card p-8 md:p-12 rounded-3xl border border-slate-200 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div class="lg:col-span-7 space-y-6">
                     <div>
                         <div class="flex justify-between items-center mb-2">
-                            <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Average Deal / Customer Value:</label>
+                            <label id="lbl-deal-val" class="text-xs font-bold text-slate-700 uppercase tracking-wider">Average Deal / Customer Value:</label>
                             <span class="font-mono font-black text-brand-700 text-sm" id="deal-val-label">250 BHD</span>
                         </div>
                         <input type="range" id="deal-range" min="50" max="2000" step="50" value="250" oninput="calculateROI()" class="w-full accent-brand-500 cursor-pointer">
@@ -310,30 +313,30 @@
 
                     <div>
                         <div class="flex justify-between items-center mb-2">
-                            <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Estimated Lost Monthly Map Leads:</label>
+                            <label id="lbl-lost-leads" class="text-xs font-bold text-slate-700 uppercase tracking-wider">Estimated Lost Monthly Map Leads:</label>
                             <span class="font-mono font-black text-brand-700 text-sm" id="leads-val-label">15 Leads</span>
                         </div>
                         <input type="range" id="leads-range" min="5" max="60" step="1" value="15" oninput="calculateROI()" class="w-full accent-brand-500 cursor-pointer">
                     </div>
 
                     <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200 text-xs text-emerald-800 space-y-1">
-                        <p class="font-bold"><i class="fa-solid fa-circle-info mr-1"></i> Local Market Insight (Bahrain):</p>
-                        <p>Over 80% of high-intent consumers looking for dental, real estate, or automotive services in Manama & Seef call the top 3 businesses on Google Maps directly.</p>
+                        <p id="roi-info-head" class="font-bold"><i class="fa-solid fa-circle-info mr-1"></i> Local Market Insight (Bahrain):</p>
+                        <p id="roi-info-desc">Over 80% of high-intent consumers looking for dental, real estate, or automotive services in Manama & Seef call the top 3 businesses on Google Maps directly.</p>
                     </div>
                 </div>
 
                 <div class="lg:col-span-5 bg-slate-900 text-white p-8 rounded-3xl space-y-6 shadow-xl border border-slate-800 text-center">
                     <div>
-                        <span class="text-xs text-slate-400 uppercase tracking-widest font-semibold block">Estimated Monthly Revenue Loss</span>
+                        <span id="lbl-loss-head" class="text-xs text-slate-400 uppercase tracking-widest font-semibold block">Estimated Monthly Revenue Loss</span>
                         <div class="text-3xl font-black font-mono text-rose-400 mt-1" id="loss-val">3,750 BHD</div>
                     </div>
 
                     <div class="pt-4 border-t border-slate-800">
-                        <span class="text-xs text-emerald-400 uppercase tracking-widest font-semibold block">Potential Monthly Gain with MapRanker</span>
+                        <span id="lbl-gain-head" class="text-xs text-emerald-400 uppercase tracking-widest font-semibold block">Potential Monthly Gain with MapRanker</span>
                         <div class="text-4xl font-black font-mono text-brand-400 mt-1" id="gain-val">9,000 BHD</div>
                     </div>
 
-                    <button type="button" onclick="sendRoiWhatsApp()"
+                    <button type="button" onclick="sendRoiWhatsApp()" id="btn-roi-whatsapp"
                        class="w-full bg-gradient-to-r from-brand-500 to-emerald-500 hover:from-brand-600 hover:to-emerald-600 text-slate-950 font-black text-xs uppercase py-4 rounded-xl shadow-lg block tracking-wider cursor-pointer">
                         Claim Your Market Share Now
                     </button>
@@ -346,32 +349,32 @@
     <section id="tools" class="py-20">
         <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
             <div class="text-center max-w-2xl mx-auto mb-14">
-                <span class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Free Local SEO Utility</span>
-                <h2 class="text-3xl font-black text-slate-900 mt-3">Google Maps 5-Star Review Link Generator</h2>
-                <p class="text-xs text-slate-600 mt-2">Generate a direct Google review link for your Bahrain business to send instantly via WhatsApp to your happy customers.</p>
+                <span id="tool-badge" class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Free Local SEO Utility</span>
+                <h2 id="tool-head" class="text-3xl font-black text-slate-900 mt-3">Google Maps 5-Star Review Link Generator</h2>
+                <p id="tool-sub" class="text-xs text-slate-600 mt-2">Generate a direct Google review link for your Bahrain business to send instantly via WhatsApp to your happy customers.</p>
             </div>
 
             <div class="glass-card p-6 md:p-8 rounded-3xl border border-slate-200 shadow-xl space-y-6">
                 <div class="flex flex-col md:flex-row gap-3">
                     <input type="text" id="review-biz" placeholder="Enter Business Name (e.g. Seef Dental Bahrain)"
                            class="flex-1 bg-white border border-slate-300 rounded-xl px-4 py-3.5 text-xs text-slate-900 focus:outline-none focus:border-brand-500 shadow-xs">
-                    <button type="button" onclick="generateReviewLink()"
+                    <button type="button" onclick="generateReviewLink()" id="btn-review-gen"
                             class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-6 py-3.5 rounded-xl text-xs uppercase tracking-wider transition cursor-pointer shadow-md">
                         Generate Review Link
                     </button>
                 </div>
 
                 <div id="review-box" class="hidden bg-emerald-50 p-5 rounded-2xl border border-emerald-200 space-y-3">
-                    <span class="text-xs font-bold text-emerald-900 block">Your Direct Google Review Link is Ready:</span>
+                    <span id="lbl-review-ready" class="text-xs font-bold text-emerald-900 block">Your Direct Google Review Link is Ready:</span>
                     <input type="text" id="review-url-input" readonly
                            class="w-full bg-white border border-emerald-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-700 select-all">
                     <div class="flex flex-wrap gap-2 pt-1">
                         <a href="#" id="test-link-btn" target="_blank" class="bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-xs">
-                            Test Link <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                            <span id="txt-test-link">Test Link</span> <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
                         </a>
-                        <button type="button" onclick="shareReviewWhatsApp()"
+                        <button type="button" onclick="shareReviewWhatsApp()" id="btn-review-share"
                            class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-xs cursor-pointer">
-                            Share via WhatsApp <i class="fa-brands fa-whatsapp ml-1"></i>
+                            <span id="txt-share-wa">Share via WhatsApp</span> <i class="fa-brands fa-whatsapp ml-1"></i>
                         </button>
                     </div>
                 </div>
@@ -383,9 +386,9 @@
     <section id="pricing" class="py-20 bg-slate-100/70 border-t border-slate-200">
         <div class="container mx-auto px-4 lg:px-8 max-w-6xl">
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Transparent Investment</span>
-                <h2 class="text-3xl font-black text-slate-900 mt-3">Local SEO & Map Domination Packages</h2>
-                <p class="text-sm text-slate-600 mt-2">No hidden fees. Guaranteed Top 3 Map Pack rankings or we work for free until you rank.</p>
+                <span id="price-badge" class="text-brand-600 text-xs font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-brand-500/20">Transparent Investment</span>
+                <h2 id="price-head" class="text-3xl font-black text-slate-900 mt-3">Local SEO & Map Domination Packages</h2>
+                <p id="price-sub" class="text-sm text-slate-600 mt-2">No hidden fees. Guaranteed Top 3 Map Pack rankings or we work for free until you rank.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -393,20 +396,20 @@
                 <div class="glass-card p-8 rounded-3xl border border-slate-200 space-y-6 flex flex-col justify-between shadow-md">
                     <div class="space-y-4">
                         <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-slate-600 uppercase tracking-widest">Starter Local</span>
-                            <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-semibold">1 Location</span>
+                            <span id="p1-title" class="text-xs font-bold text-slate-600 uppercase tracking-widest">Starter Local</span>
+                            <span id="p1-loc" class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-semibold">1 Location</span>
                         </div>
                         <h3 class="text-2xl font-black text-slate-900"><span class="price-val" data-bhd="150" data-usd="400">150 BHD</span> <span class="text-xs font-normal text-slate-500">/mo</span></h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Ideal for single-location clinics or shops starting out in Bahrain.</p>
+                        <p id="p1-desc" class="text-xs text-slate-600 leading-relaxed">Ideal for single-location clinics or shops starting out in Bahrain.</p>
                         
                         <ul class="space-y-3 text-xs text-slate-700 pt-2 border-t border-slate-200">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Google Business Profile Audit</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Primary Category Optimization</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> 30 Geotagged Citations / mo</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Monthly Ranking Report</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> <span id="p1-f1">Google Business Profile Audit</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> <span id="p1-f2">Primary Category Optimization</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> <span id="p1-f3">30 Geotagged Citations / mo</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> <span id="p1-f4">Monthly Ranking Report</span></li>
                         </ul>
                     </div>
-                    <button type="button" onclick="openWhatsApp('I want to get started with the Starter Local Package.')"
+                    <button type="button" onclick="openWhatsApp('I want to get started with the Starter Local Package.')" id="btn-p1"
                        class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-xl uppercase tracking-wider text-center transition shadow-sm cursor-pointer">
                         Choose Starter
                     </button>
@@ -414,26 +417,26 @@
 
                 <!-- Growth Engine -->
                 <div class="glass-card p-8 rounded-3xl border-2 border-brand-500 space-y-6 flex flex-col justify-between shadow-xl relative bg-white">
-                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-brand-500 to-emerald-600 text-white text-[10px] font-black uppercase px-4 py-1 rounded-full shadow-md tracking-wider">
+                    <div id="p2-badge" class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-brand-500 to-emerald-600 text-white text-[10px] font-black uppercase px-4 py-1 rounded-full shadow-md tracking-wider">
                         Most Popular for Seef & Manama
                     </div>
 
                     <div class="space-y-4 pt-2">
                         <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-brand-700 uppercase tracking-widest">Growth Engine</span>
-                            <span class="text-[10px] bg-emerald-100 text-brand-800 px-2 py-0.5 rounded font-bold">Priority ROI</span>
+                            <span id="p2-title" class="text-xs font-bold text-brand-700 uppercase tracking-widest">Growth Engine</span>
+                            <span id="p2-tag" class="text-[10px] bg-emerald-100 text-brand-800 px-2 py-0.5 rounded font-bold">Priority ROI</span>
                         </div>
                         <h3 class="text-3xl font-black text-slate-900"><span class="price-val" data-bhd="300" data-usd="800">300 BHD</span> <span class="text-xs font-normal text-slate-500">/mo</span></h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Full Python Geo-Grid optimization to dominate your local district.</p>
+                        <p id="p2-desc" class="text-xs text-slate-600 leading-relaxed">Full Python Geo-Grid optimization to dominate your local district.</p>
                         
                         <ul class="space-y-3 text-xs text-slate-700 pt-2 border-t border-slate-200">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Everything in Starter Package</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Full 3x3 Geo-Grid Heatmap Tracking</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> 90 Geotagged Authority Citations</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> WhatsApp Review Request Automation</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> <span id="p2-f1">Everything in Starter Package</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> <span id="p2-f2">Full 3x3 Geo-Grid Heatmap Tracking</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> <span id="p2-f3">90 Geotagged Authority Citations</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> <span id="p2-f4">WhatsApp Review Request Automation</span></li>
                         </ul>
                     </div>
-                    <button type="button" onclick="openWhatsApp('I want to get started with the Growth Engine Package.')"
+                    <button type="button" onclick="openWhatsApp('I want to get started with the Growth Engine Package.')" id="btn-p2"
                        class="w-full bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white font-black text-xs py-4 rounded-xl uppercase tracking-wider text-center shadow-lg transition cursor-pointer">
                         Get Growth Engine
                     </button>
@@ -443,19 +446,19 @@
                 <div class="glass-card p-8 rounded-3xl border border-slate-200 space-y-6 flex flex-col justify-between shadow-md">
                     <div class="space-y-4">
                         <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-slate-600 uppercase tracking-widest">Multi-Branch</span>
-                            <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-semibold">Custom</span>
+                            <span id="p3-title" class="text-xs font-bold text-slate-600 uppercase tracking-widest">Multi-Branch</span>
+                            <span id="p3-tag" class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-semibold">Custom</span>
                         </div>
-                        <h3 class="text-2xl font-black text-slate-900">Custom <span class="text-xs font-normal text-slate-500">/mo</span></h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">For multi-branch clinics, franchises, and large real estate firms across Bahrain.</p>
+                        <h3 id="p3-price" class="text-2xl font-black text-slate-900">Custom <span class="text-xs font-normal text-slate-500">/mo</span></h3>
+                        <p id="p3-desc" class="text-xs text-slate-600 leading-relaxed">For multi-branch clinics, franchises, and large real estate firms across Bahrain.</p>
                         
                         <ul class="space-y-3 text-xs text-slate-700 pt-2 border-t border-slate-200">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Unlimited GBP Locations</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Custom Python Scraping API</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> Advanced Schema & Landing Pages</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> <span id="p3-f1">Unlimited GBP Locations</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> <span id="p3-f2">Custom Python Scraping API</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-600"></i> <span id="p3-f3">Advanced Schema & Landing Pages</span></li>
                         </ul>
                     </div>
-                    <button type="button" onclick="openWhatsApp('I want a custom Multi-Branch Local SEO proposal.')"
+                    <button type="button" onclick="openWhatsApp('I want a custom Multi-Branch Local SEO proposal.')" id="btn-p3"
                        class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-xl uppercase tracking-wider text-center transition shadow-sm cursor-pointer">
                         Contact Enterprise
                     </button>
@@ -470,19 +473,19 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
                 <div class="space-y-4 md:col-span-1">
                     <img src="assets/logo.jpg" onerror="this.onerror=null; this.src='assets/mapranker-favicon-32x32.png.jpg';" alt="MapRanker" class="h-10 w-auto object-contain rounded-lg mx-auto md:mx-0">
-                    <p class="text-xs text-slate-400">Bahrain's premier Google Maps optimization & Python local SEO automation agency.</p>
+                    <p id="ft-desc" class="text-xs text-slate-400">Bahrain's premier Google Maps optimization & Python local SEO automation agency.</p>
                     <div class="text-xs text-brand-400 font-mono font-semibold">📍 Seef District, Manama, Bahrain</div>
                 </div>
                 <div class="space-y-3">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-white">Platform Links</h4>
+                    <h4 id="ft-links-title" class="text-xs font-bold uppercase tracking-wider text-white">Platform Links</h4>
                     <ul class="space-y-2 text-xs text-slate-400">
-                        <li><a href="#audit" class="hover:text-brand-400 transition">Instant Audit</a></li>
-                        <li><a href="#competitor" class="hover:text-brand-400 transition">Competitor Battle</a></li>
-                        <li><a href="#calculator" class="hover:text-brand-400 transition">ROI Calculator</a></li>
+                        <li><a href="#audit" id="ft-l1" class="hover:text-brand-400 transition">Instant Audit</a></li>
+                        <li><a href="#competitor" id="ft-l2" class="hover:text-brand-400 transition">Competitor Battle</a></li>
+                        <li><a href="#calculator" id="ft-l3" class="hover:text-brand-400 transition">ROI Calculator</a></li>
                     </ul>
                 </div>
                 <div class="space-y-3">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-white">Target Markets</h4>
+                    <h4 id="ft-mkts-title" class="text-xs font-bold uppercase tracking-wider text-white">Target Markets</h4>
                     <ul class="space-y-2 text-xs text-slate-400">
                         <li>Manama City Center</li>
                         <li>Seef District Business Hub</li>
@@ -491,8 +494,8 @@
                     </ul>
                 </div>
                 <div class="space-y-3">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-white">Direct Support</h4>
-                    <p class="text-xs text-slate-400">Speak directly with our Bahrain growth engineers.</p>
+                    <h4 id="ft-supp-title" class="text-xs font-bold uppercase tracking-wider text-white">Direct Support</h4>
+                    <p id="ft-supp-sub" class="text-xs text-slate-400">Speak directly with our Bahrain growth engineers.</p>
                     <button type="button" onclick="openWhatsApp('Hi MapRanker Team!')" class="bg-brand-500 hover:bg-brand-600 text-slate-950 font-black text-xs uppercase px-4 py-2.5 rounded-xl shadow-md cursor-pointer">
                         <i class="fa-brands fa-whatsapp mr-1"></i> +973 3536 3541
                     </button>
@@ -504,10 +507,260 @@
         </div>
     </footer>
 
-    <!-- JavaScript Logic -->
+    <!-- JavaScript Translations & Dynamic Logic -->
     <script>
         const whatsappNumber = "97335363541";
+        let currentLang = 'en';
         let currentCurrency = 'BHD';
+
+        const i18n = {
+            en: {
+                announcement: "Serving Bahrain & GCC Region (Manama, Seef, Riffa, Muharraq)",
+                langBtn: "العربية",
+                navAudit: "Instant Audit",
+                navCompetitor: "Competitor Battle",
+                navChecklist: "SEO Health Check",
+                navHeatmap: "Geo-Grid",
+                navCalculator: "ROI Engine",
+                navPricing: "Pricing",
+                btnConsult: "Consult Specialist",
+                heroBadge: "#1 Enterprise Local SEO Engine for Bahrain & GCC",
+                heroTitle1: "Capture Every High-Paying Walk-In Client in",
+                heroTitle2: "Bahrain & Seef District",
+                heroSub: "We engineer automated local search dominance for Dental Clinics, Real Estate Firms, Automotive Centers, and Fine Dining using Python Grid Scraping & Google Maps SEO.",
+                auditHead: "Run Instant Google Maps Local Rank Audit",
+                auditDesc: "Enter your Google Business Name or Website URL to trigger automatic competitor grid scan.",
+                txtAuditBtn: "Analyze My Local Map Rank Now",
+                auditResTitle: "Audit Scan Complete: Missing Top 3 Pack",
+                auditResSub: "Your business is invisible to 68% of walk-in search clients in Bahrain.",
+                txtAuditPdfBtn: "Get Full Report on WhatsApp",
+                compBadge: "Head-to-Head Rival Battle",
+                compHead: "Compare Your Map Rank Against Your #1 Competitor",
+                compSub: "See exactly how many reviews, citations, and local ranking power your top competitor is stealing from you.",
+                lblMyBiz: "Your Business / Brand Name:",
+                lblRivalBiz: "Top Local Competitor Name:",
+                txtCompBtn: "Run Comparative Rival Battle Scan",
+                compMyDesc: "Low review velocity, missing Seef district geotagged citations, invisible on mobile map pack.",
+                compRivalDesc: "Dominating top 3 spots with 180+ 5-star reviews and robust local schema authority.",
+                compWarn: "⚠️ You are losing approx. 65% of potential client calls to this competitor every single week.",
+                btnCompWa: "Deploy Strategy to Outrank Competitor Now",
+                chkBadge: "Interactive Scorecard",
+                chkHead: "60-Second Local SEO Health Checklist",
+                chkSub: "Check the boxes below that apply to your business profile to reveal your instant optimization score.",
+                chkTxt1: "Is your Google Business Profile fully verified with correct Bahrain category?",
+                chkTxt2: "Do you receive at least 10 new Google 5-star reviews every month?",
+                chkTxt3: "Are you ranking in the Top 3 map pack for customers searching from Seef or Manama?",
+                chkTxt4: "Do you have automated WhatsApp lead routing active on your website & GMB?",
+                lblScoreTitle: "Your Local SEO Health Score:",
+                btnChkWa: "Fix My Gaps via WhatsApp",
+                roiBadge: "Interactive Revenue Calculator",
+                roiHead: "Calculate What Missing Top 3 Map Rank Costs You",
+                roiSub: "Adjust your average customer deal value and monthly lost map leads to see your revenue potential.",
+                lblDealVal: "Average Deal / Customer Value:",
+                lblLostLeads: "Estimated Lost Monthly Map Leads:",
+                roiInfoHead: "Local Market Insight (Bahrain):",
+                roiInfoDesc: "Over 80% of high-intent consumers looking for dental, real estate, or automotive services in Manama & Seef call the top 3 businesses on Google Maps directly.",
+                lblLossHead: "Estimated Monthly Revenue Loss",
+                lblGainHead: "Potential Monthly Gain with MapRanker",
+                btnRoiWa: "Claim Your Market Share Now",
+                toolBadge: "Free Local SEO Utility",
+                toolHead: "Google Maps 5-Star Review Link Generator",
+                toolSub: "Generate a direct Google review link for your Bahrain business to send instantly via WhatsApp to your happy customers.",
+                btnReviewGen: "Generate Review Link",
+                lblReviewReady: "Your Direct Google Review Link is Ready:",
+                txtTestLink: "Test Link",
+                txtShareWa: "Share via WhatsApp",
+                priceBadge: "Transparent Investment",
+                priceHead: "Local SEO & Map Domination Packages",
+                priceSub: "No hidden fees. Guaranteed Top 3 Map Pack rankings or we work for free until you rank.",
+                p1Title: "Starter Local", p1Loc: "1 Location", p1Desc: "Ideal for single-location clinics or shops starting out in Bahrain.",
+                p1F1: "Google Business Profile Audit", p1F2: "Primary Category Optimization", p1F3: "30 Geotagged Citations / mo", p1F4: "Monthly Ranking Report", btnP1: "Choose Starter",
+                p2Badge: "Most Popular for Seef & Manama", p2Title: "Growth Engine", p2Tag: "Priority ROI", p2Desc: "Full Python Geo-Grid optimization to dominate your local district.",
+                p2F1: "Everything in Starter Package", p2F2: "Full 3x3 Geo-Grid Heatmap Tracking", p2F3: "90 Geotagged Authority Citations", p2F4: "WhatsApp Review Request Automation", btnP2: "Get Growth Engine",
+                p3Title: "Multi-Branch", p3Tag: "Custom", p3Price: "Custom", p3Desc: "For multi-branch clinics, franchises, and large real estate firms across Bahrain.",
+                p3F1: "Unlimited GBP Locations", p3F2: "Custom Python Scraping API", p3F3: "Advanced Schema & Landing Pages", btnP3: "Contact Enterprise",
+                ftDesc: "Bahrain's premier Google Maps optimization & Python local SEO automation agency.",
+                ftLinksTitle: "Platform Links", ftL1: "Instant Audit", ftL2: "Competitor Battle", ftL3: "ROI Calculator",
+                ftMktsTitle: "Target Markets", ftSuppTitle: "Direct Support", ftSuppSub: "Speak directly with our Bahrain growth engineers."
+            },
+            ar: {
+                announcement: "نخدم البحرين ودول الخليج (المنامة، السيف، الرفاع، المحرق)",
+                langBtn: "English",
+                navAudit: "تدقيق فوري",
+                navCompetitor: "مقارنة المنافسين",
+                navChecklist: "فحص السيو المحلي",
+                navHeatmap: "خريطة النطاق",
+                navCalculator: "حاسبة الأرباح",
+                navPricing: "الأسعار",
+                btnConsult: "استشر خبير النمو",
+                heroBadge: "#1 المحرك المتقدم للسيو المحلي في البحرين والخليج",
+                heroTitle1: "اكتسب كل عميل متواجد في",
+                heroTitle2: "البحرين وضاحية السيف",
+                heroSub: "نهندس الهيمنة التلقائية على البحث المحلي لعيادات الأسنان، شركات العقارات، ومراكز السيارات باستخدام سكربتات بايثون والسيو الجغرافي.",
+                auditHead: "شغّل تدقيق ترتيب خرائط جوجل الفوري",
+                auditDesc: "أدخل اسم نشاطك التجاري أو رابط الموقع لتفعيل مسح شبكة المنافسين تلقائيًا.",
+                txtAuditBtn: "حلل ترتيب خرائطي الآن",
+                auditResTitle: "اكتمل التدقيق: حسابك مفقود من أول 3 نتائج",
+                auditResSub: "نشاطك التجاري غير مرئي لـ 68% من العملاء الباحثين في البحرين.",
+                txtAuditPdfBtn: "احصل على التقرير الكامل عبر واتساب",
+                compBadge: "معركة المنافسة المباشرة",
+                compHead: "قارن ترتيب خرائطك ضد منافسك الأول",
+                compSub: "شاهد بالضبط عدد التقييمات والإشارات المحلية التي يستحوذ عليها منافسك منك.",
+                lblMyBiz: "اسم نشاطك التجاري / العلامة:",
+                lblRivalBiz: "اسم المنافس المحلي الأول:",
+                txtCompBtn: "بدء مسح المعركة التنافسية",
+                compMyDesc: "معدل تقييمات ضعيف، ونقص إشارات السيف الجغرافية، وغير مرئي على خرائط الجوال.",
+                compRivalDesc: "يهيمن على المراكز الثلاثة الأولى بـ 180+ تقييم 5 نجوم وسلطة سيو قوية.",
+                compWarn: "⚠️ أنت تخسر ما يقارب 65% من مكالمات العملاء المحتملين لصالح هذا المنافس أسبوعيًا.",
+                btnCompWa: "نفّذ استراتيجية التفوق على المنافس الآن",
+                chkBadge: "بطاقة التقييم التفاعلية",
+                chkHead: "قائمة فحص صحة السيو المحلي خلال 60 ثانية",
+                chkSub: "حدد الخيارات المطبقة على ملفك التجاري لكشف نسبة التحسين الفورية.",
+                chkTxt1: "هل ملف جوجل التجاري موثق بالكامل مع الفئة الصحيحة في البحرين؟",
+                chkTxt2: "هل تتلقى على الأقل 10 تقييمات 5 نجوم جديدة شهريًا؟",
+                chkTxt3: "هل تتصدر أول 3 نتائج للعملاء الباحثين من السيف أو المنامة؟",
+                chkTxt4: "هل لديك نظام تحويل العملاء الآلي عبر واتساب في موقعك وملفك؟",
+                lblScoreTitle: "درجة صحة السيو المحلي لديك:",
+                btnChkWa: "أصلح ثغرات ملفي عبر واتساب",
+                roiBadge: "حاسبة الإيرادات التفاعلية",
+                roiHead: "احسب تكلفة غيابك عن أول 3 نتائج في الخرائط",
+                roiSub: "اضبط متوسط قيمة العميل والعملاء المفقودين لرؤية أرباحك المحتملة.",
+                lblDealVal: "متوسط قيمة العميل / الصفقة:",
+                lblLostLeads: "العملاء المفقودون شهريًا من الخرائط:",
+                roiInfoHead: "رؤية السوق المحلي (البحرين):",
+                roiInfoDesc: "أكثر من 80% من العملاء المهتمين بعيادات الأسنان والعقارات في المنامة والسيف يتصلون بأول 3 أنشطة على جوجل مباشرة.",
+                lblLossHead: "خسارة الإيرادات الشهرية المقدرة",
+                lblGainHead: "الربح Monthly المحتمل مع MapRanker",
+                btnRoiWa: "استرد حصتك من السوق الآن",
+                toolBadge: "أداة السيو المحلي المجانية",
+                toolHead: "مولد رابط تقييم 5 نجوم لخرائط جوجل",
+                toolSub: "أنشئ رابط تقييم مباشر لنشاطك في البحرين لإرساله فورًا عبر واتساب لعملائك.",
+                btnReviewGen: "إنشاء رابط التقييم",
+                lblReviewReady: "رابط التقييم المباشر جاهز الآن:",
+                txtTestLink: "تجربة الرابط",
+                txtShareWa: "مشاركة عبر واتساب",
+                priceBadge: "استثمار شفاف",
+                priceHead: "باقات السيو المحلي والهيمنة على الخرائط",
+                priceSub: "بدون رسوم مخفية. ضمان الوصول لأول 3 نتائج أو نعمل مجانًا حتى تتصدر.",
+                p1Title: "الباقة الأساسية", p1Loc: "موقع واحد", p1Desc: "مثالية للعيادات أو المحلات ذات الفرع الواحد في البحرين.",
+                p1F1: "تدقيق ملف جوجل التجاري", p1F2: "تحسين الفئة الرئيسية", p1F3: "30 إشارة جغرافية شهريًا", p1F4: "تقرير ترتيب شهري", btnP1: "اختيار الأساسية",
+                p2Badge: "الأكثر طلبًا في السيف والمنامة", p2Title: "مُحرك النمو", p2Tag: "عائد أولوي", p2Desc: "تحسين شامل بنظام بايثون الجغرافي للسيطرة على منطقتك.",
+                p2F1: "كل ما في الباقة الأساسية", p2F2: "تتبع خريطة النطاق الجغرافي 3x3", p2F3: "90 إشارة جغرافية موثوقة", p2F4: "أتمتة طلب التقييمات عبر واتساب", btnP2: "احصل على محرك النمو",
+                p3Title: "متعدد الفروع", p3Tag: "مخصص", p3Price: "مخصص", p3Desc: "للعيادات متعددة الفروع، الشركات والعقارات الكبرى في البحرين.",
+                p3F1: "إدارة فروع غير محدودة", p3F2: "واجهة بايثون المخصصة للمنافسين", p3F3: "سيو متقدم وصفحات هبوط جغرافية", btnP3: "تواصل مع قسم الشركات",
+                ftDesc: "وكالة السيو المحلي وأتمتة خرائط جوجل الأولى في مملكة البحرين.",
+                ftLinksTitle: "روابط المنصة", ftL1: "تدقيق فوري", ftL2: "معركة المنافسين", ftL3: "حاسبة الأرباح",
+                ftMktsTitle: "الأسواق المستهدفة", ftSuppTitle: "الدعم المباشر", ftSuppSub: "تحدث مباشرة مع مهندسي النمو في البحرين."
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            const dict = i18n[currentLang];
+            const htmlEl = document.getElementById('main-html');
+
+            if(currentLang === 'ar') {
+                htmlEl.setAttribute('dir', 'rtl');
+                htmlEl.classList.add('font-arabic');
+                htmlEl.classList.remove('font-sans');
+            } else {
+                htmlEl.setAttribute('dir', 'ltr');
+                htmlEl.classList.add('font-sans');
+                htmlEl.classList.remove('font-arabic');
+            }
+
+            // Replace All Text Elements
+            document.getElementById('txt-announcement').innerText = dict.announcement;
+            document.getElementById('txt-lang-btn').innerText = dict.langBtn;
+            document.getElementById('nav-audit').innerText = dict.navAudit;
+            document.getElementById('nav-competitor').innerText = dict.navCompetitor;
+            document.getElementById('nav-checklist').innerText = dict.navChecklist;
+            document.getElementById('nav-heatmap').innerText = dict.navHeatmap;
+            document.getElementById('nav-calculator').innerText = dict.navCalculator;
+            document.getElementById('nav-pricing').innerText = dict.navPricing;
+            document.getElementById('btn-consult').innerText = dict.btnConsult;
+            document.getElementById('hero-badge').innerText = dict.heroBadge;
+            document.getElementById('hero-title-1').innerText = dict.heroTitle1;
+            document.getElementById('hero-title-2').innerText = dict.heroTitle2;
+            document.getElementById('hero-subtitle').innerText = dict.heroSub;
+            document.getElementById('audit-head').innerText = dict.auditHead;
+            document.getElementById('audit-desc').innerText = dict.auditDesc;
+            document.getElementById('txt-audit-btn').innerText = dict.txtAuditBtn;
+            document.getElementById('audit-res-title').innerText = dict.auditResTitle;
+            document.getElementById('audit-res-sub').innerText = dict.auditResSub;
+            document.getElementById('txt-audit-pdf-btn').innerText = dict.txtAuditPdfBtn;
+            document.getElementById('comp-badge').innerText = dict.compBadge;
+            document.getElementById('comp-head').innerText = dict.compHead;
+            document.getElementById('comp-sub').innerText = dict.compSub;
+            document.getElementById('lbl-my-biz').innerText = dict.lblMyBiz;
+            document.getElementById('lbl-rival-biz').innerText = dict.lblRivalBiz;
+            document.getElementById('txt-comp-btn').innerText = dict.txtCompBtn;
+            document.getElementById('comp-my-desc').innerText = dict.compMyDesc;
+            document.getElementById('comp-rival-desc').innerText = dict.compRivalDesc;
+            document.getElementById('comp-warn').innerText = dict.compWarn;
+            document.getElementById('btn-comp-whatsapp').innerText = dict.btnCompWa;
+            document.getElementById('chk-badge').innerText = dict.chkBadge;
+            document.getElementById('chk-head').innerText = dict.chkHead;
+            document.getElementById('chk-sub').innerText = dict.chkSub;
+            document.getElementById('chk-txt-1').innerText = dict.chkTxt1;
+            document.getElementById('chk-txt-2').innerText = dict.chkTxt2;
+            document.getElementById('chk-txt-3').innerText = dict.chkTxt3;
+            document.getElementById('chk-txt-4').innerText = dict.chkTxt4;
+            document.getElementById('lbl-score-title').innerText = dict.lblScoreTitle;
+            document.getElementById('btn-chk-whatsapp').innerText = dict.btnChkWa;
+            document.getElementById('roi-badge').innerText = dict.roiBadge;
+            document.getElementById('roi-head').innerText = dict.roiHead;
+            document.getElementById('roi-sub').innerText = dict.roiSub;
+            document.getElementById('lbl-deal-val').innerText = dict.lblDealVal;
+            document.getElementById('lbl-lost-leads').innerText = dict.lblLostLeads;
+            document.getElementById('roi-info-head').innerHTML = `<i class="fa-solid fa-circle-info mr-1"></i> ` + dict.roiInfoHead;
+            document.getElementById('roi-info-desc').innerText = dict.roiInfoDesc;
+            document.getElementById('lbl-loss-head').innerText = dict.lblLossHead;
+            document.getElementById('lbl-gain-head').innerText = dict.lblGainHead;
+            document.getElementById('btn-roi-whatsapp').innerText = dict.btnRoiWa;
+            document.getElementById('tool-badge').innerText = dict.toolBadge;
+            document.getElementById('tool-head').innerText = dict.toolHead;
+            document.getElementById('tool-sub').innerText = dict.toolSub;
+            document.getElementById('btn-review-gen').innerText = dict.btnReviewGen;
+            document.getElementById('lbl-review-ready').innerText = dict.lblReviewReady;
+            document.getElementById('txt-test-link').innerText = dict.txtTestLink;
+            document.getElementById('txt-share-wa').innerText = dict.txtShareWa;
+            document.getElementById('price-badge').innerText = dict.priceBadge;
+            document.getElementById('price-head').innerText = dict.priceHead;
+            document.getElementById('price-sub').innerText = dict.priceSub;
+            document.getElementById('p1-title').innerText = dict.p1Title;
+            document.getElementById('p1-loc').innerText = dict.p1Loc;
+            document.getElementById('p1-desc').innerText = dict.p1Desc;
+            document.getElementById('p1-f1').innerText = dict.p1F1;
+            document.getElementById('p1-f2').innerText = dict.p1F2;
+            document.getElementById('p1-f3').innerText = dict.p1F3;
+            document.getElementById('p1-f4').innerText = dict.p1F4;
+            document.getElementById('btn-p1').innerText = dict.btnP1;
+            document.getElementById('p2-badge').innerText = dict.p2Badge;
+            document.getElementById('p2-title').innerText = dict.p2Title;
+            document.getElementById('p2-tag').innerText = dict.p2Tag;
+            document.getElementById('p2-desc').innerText = dict.p2Desc;
+            document.getElementById('p2-f1').innerText = dict.p2F1;
+            document.getElementById('p2-f2').innerText = dict.p2F2;
+            document.getElementById('p2-f3').innerText = dict.p2F3;
+            document.getElementById('p2-f4').innerText = dict.p2F4;
+            document.getElementById('btn-p2').innerText = dict.btnP2;
+            document.getElementById('p3-title').innerText = dict.p3Title;
+            document.getElementById('p3-tag').innerText = dict.p3Tag;
+            document.getElementById('p3-desc').innerText = dict.p3Desc;
+            document.getElementById('p3-f1').innerText = dict.p3F1;
+            document.getElementById('p3-f2').innerText = dict.p3F2;
+            document.getElementById('p3-f3').innerText = dict.p3F3;
+            document.getElementById('btn-p3').innerText = dict.btnP3;
+            document.getElementById('ft-desc').innerText = dict.ftDesc;
+            document.getElementById('ft-links-title').innerText = dict.ftLinksTitle;
+            document.getElementById('ft-l1').innerText = dict.ftL1;
+            document.getElementById('ft-l2').innerText = dict.ftL2;
+            document.getElementById('ft-l3').innerText = dict.ftL3;
+            document.getElementById('ft-mkts-title').innerText = dict.ftMktsTitle;
+            document.getElementById('ft-supp-title').innerText = dict.ftSuppTitle;
+            document.getElementById('ft-supp-sub').innerText = dict.ftSuppSub;
+        }
 
         function openWhatsApp(text) {
             const encoded = encodeURIComponent(text);
@@ -532,7 +785,6 @@
             calculateROI();
         }
 
-        // Audit Simulator
         let lastAuditScore = 42;
         function runAudit(e) {
             e.preventDefault();
@@ -543,7 +795,7 @@
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-white mr-2"></i> Scanning Bahrain Google Map Grid...';
             
             setTimeout(() => {
-                btn.innerHTML = '<i class="fa-solid fa-bolt text-white mr-2"></i> Analyze My Local Map Rank Now';
+                btn.innerHTML = '<i class="fa-solid fa-bolt text-white mr-2"></i> <span id="txt-audit-btn">Analyze My Local Map Rank Now</span>';
                 lastAuditScore = Math.floor(Math.random() * (55 - 35 + 1)) + 35;
                 document.getElementById('audit-score-val').innerText = lastAuditScore;
                 document.getElementById('audit-result').classList.remove('hidden');
@@ -558,7 +810,6 @@
             openWhatsApp(text);
         }
 
-        // Competitor Battle
         let globalMyBiz = '';
         let globalRivalBiz = '';
         function runCompetitorCheck() {
@@ -575,7 +826,7 @@
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-white text-base mr-2"></i> Analyzing Competitor Backlinks & Citations...';
 
             setTimeout(() => {
-                btn.innerHTML = '<i class="fa-solid fa-bolt text-white text-base mr-2"></i> Run Comparative Rival Battle Scan';
+                btn.innerHTML = '<i class="fa-solid fa-bolt text-white text-base mr-2"></i> <span id="txt-comp-btn">Run Comparative Rival Battle Scan</span>';
                 document.getElementById('display-my-biz').innerText = myBiz;
                 document.getElementById('display-rival-biz').innerText = rivalBiz;
                 document.getElementById('display-my-score').innerText = (Math.floor(Math.random() * 20) + 25) + '/100';
@@ -588,14 +839,12 @@
             openWhatsApp(`I want to outrank my competitor ${globalRivalBiz} for my business ${globalMyBiz}. Let's deploy the strategy!`);
         }
 
-        // Checklist
         function updateChecklist() {
             let score = 20;
             if(document.getElementById('chk-1').checked) score += 20;
             if(document.getElementById('chk-2').checked) score += 20;
             if(document.getElementById('chk-3').checked) score += 20;
             if(document.getElementById('chk-4').checked) score += 20;
-            document.getElementById('health-score-text.innerHTML') = score + '% Optimized';
             document.getElementById('health-score-text').innerText = score + '% Optimized';
         }
 
@@ -604,7 +853,6 @@
             openWhatsApp(`I checked my Local SEO health score on MapRanker and it is ${score}. I want to fix my optimization gaps.`);
         }
 
-        // ROI Calculator
         function calculateROI() {
             const deal = parseInt(document.getElementById('deal-range').value);
             const leads = parseInt(document.getElementById('leads-range').value);
@@ -629,7 +877,6 @@
             openWhatsApp(`I calculated my ROI on MapRanker. Estimated potential monthly gain: ${gain}. I want to claim my market share.`);
         }
 
-        // Review Link Tool
         let generatedUrl = '';
         function generateReviewLink() {
             const biz = document.getElementById('review-biz').value;
@@ -648,6 +895,5 @@
             openWhatsApp(`Hi! Please leave us a 5-star review on Google Maps: ${generatedUrl}`);
         }
     </script>
-
 </body>
 </html>
