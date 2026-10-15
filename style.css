@@ -1,9 +1,14 @@
-/* Custom scroll behavior */
+/* Custom scroll behavior with performance & font swap optimization */
 html {
     scroll-behavior: smooth;
+    font-display: swap;
+    -webkit-text-size-adjust: 100%;
+    box-sizing: border-box;
 }
 
-/* Glassmorphism effects */
+/* Glassmorphism effects optimized for high-speed mobile rendering */
 header {
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    will-change: transform, opacity;
 }
